@@ -1,0 +1,268 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 4%;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: var(--gold);
+  cursor: pointer;
+  margin-bottom: 30px;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup.full {
+  grid-column: span 2;
+}
+
+.inputGroup label {
+  font-size: 11px;
+  color: var(--gold);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.inputGroup input, .inputGroup textarea {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  padding: 12px 18px;
+  border-radius: 8px;
+  color: var(--foreground);
+  font-size: 14px;
+  outline: none;
+}
+
+.paymentSelector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option.active {
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.itemIcon {
+  width: 40px;
+  height: 40px;
+  background: rgba(212, 175, 55, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: var(--gold);
+}
+
+.info {
+  flex: 1;
+}
+
+.info p {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.info span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.price {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.divider {
+  height: 1px;
+  background: var(--glass-border);
+  margin: 20px 0;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+}
+
+.totalPrice {
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+
+.securityBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  background: rgba(46, 204, 113, 0.05);
+  border: 1px solid rgba(46, 204, 113, 0.2);
+  border-radius: 12px;
+  color: #2ecc71;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.successWrapper {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4%;
+}
+
+/* Premium QR & Verification CSS */
+.qrContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0 20px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.qrImage {
+  width: 220px;
+  height: 220px;
+  border-radius: 12px;
+  border: 4px solid var(--gold);
+  box-shadow: 0 0 25px rgba(223, 183, 67, 0.2);
+  margin-bottom: 20px;
+  background: #ffffff;
+  padding: 10px;
+}
+
+.qrInstructions {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 480px;
+  margin-bottom: 24px;
+}
+
+.receiptUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--glass-border);
+  border-radius: 12px;
+  padding: 24px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.01);
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.receiptUpload:hover {
+  border-color: var(--gold);
+  background: rgba(223, 183, 67, 0.03);
+}
+
+.receiptUpload span {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  text-align: center;
+}
+
+.uploadedFile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(223, 183, 67, 0.1);
+  border: 1px solid var(--glass-border);
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.refundDisclaimer {
+  font-size: 12px;
+  color: #f1c40f;
+  background: rgba(241, 196, 15, 0.08);
+  border: 1px dashed rgba(241, 196, 15, 0.3);
+  padding: 14px 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

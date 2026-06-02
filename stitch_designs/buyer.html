@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Browse Artifacts | THE ARCHIVIST</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Work+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-background": "#1b1d0e",
+              "error": "#ba1a1a",
+              "on-primary": "#ffffff",
+              "inverse-surface": "#303221",
+              "on-secondary-fixed-variant": "#5d4201",
+              "on-secondary": "#ffffff",
+              "on-surface": "#1b1d0e",
+              "surface-dim": "#dbdcc3",
+              "primary-fixed": "#ffdbd0",
+              "surface-container": "#efefd7",
+              "outline-variant": "#d4c3be",
+              "surface-container-high": "#eaead1",
+              "secondary-fixed-dim": "#e9c176",
+              "primary-container": "#5d4037",
+              "inverse-on-surface": "#f2f2d9",
+              "tertiary-fixed": "#ffdbce",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed": "#2c160e",
+              "surface-tint": "#77574d",
+              "on-primary-fixed-variant": "#5d4037",
+              "on-secondary-container": "#785a1a",
+              "primary-fixed-dim": "#e7bdb1",
+              "on-tertiary-container": "#d2aea1",
+              "secondary-container": "#fed488",
+              "surface-container-highest": "#e4e4cc",
+              "on-tertiary-fixed-variant": "#5b4137",
+              "on-surface-variant": "#504441",
+              "on-secondary-fixed": "#261900",
+              "outline": "#827470",
+              "surface-container-lowest": "#ffffff",
+              "inverse-primary": "#e7bdb1",
+              "surface-variant": "#e4e4cc",
+              "surface": "#fbfbe2",
+              "surface-bright": "#fbfbe2",
+              "secondary-fixed": "#ffdea5",
+              "on-tertiary-fixed": "#2b160f",
+              "on-error-container": "#93000a",
+              "on-error": "#ffffff",
+              "secondary": "#775a19",
+              "tertiary": "#432b22",
+              "error-container": "#ffdad6",
+              "tertiary-container": "#5b4137",
+              "background": "#fbfbe2",
+              "surface-container-low": "#f5f5dc",
+              "primary": "#442a22",
+              "on-primary-container": "#d4ada1",
+              "tertiary-fixed-dim": "#e4beb2"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Work Sans"],
+              "label": ["Work Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+        .artifact-card:nth-child(even) {
+            margin-top: 4rem;
+        }
+        .artifact-card:nth-child(3n) {
+            margin-top: -2rem;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#fbfbe2]/80 dark:bg-stone-900/80 backdrop-blur-md flex justify-between items-center px-8 h-20 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-6">
+<button class="text-[#442a22] dark:text-[#fbfbe2] scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="text-2xl font-serif uppercase tracking-widest text-[#442a22] dark:text-[#fbfbe2]">THE ARCHIVIST</h1>
+</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-[#775a19] font-bold border-b-2 border-[#775a19] font-serif tracking-tight leading-tight hover:text-[#775a19] transition-colors duration-300" href="#">Curated Collections</a>
+<a class="text-[#442a22] dark:text-stone-400 font-serif tracking-tight leading-tight hover:text-[#775a19] transition-colors duration-300" href="#">Furniture</a>
+<a class="text-[#442a22] dark:text-stone-400 font-serif tracking-tight leading-tight hover:text-[#775a19] transition-colors duration-300" href="#">Timepieces</a>
+<a class="text-[#442a22] dark:text-stone-400 font-serif tracking-tight leading-tight hover:text-[#775a19] transition-colors duration-300" href="#">Art &amp; Textiles</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-[#442a22] dark:text-[#fbfbe2] scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+</div>
+</header>
+<main class="pt-32 pb-24 px-8 max-w-screen-2xl mx-auto">
+<!-- Search & Refine Section -->
+<section class="mb-16">
+<div class="flex flex-col md:flex-row gap-4 items-center">
+<div class="relative w-full group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none border-b border-outline-variant/20 focus:ring-0 focus:border-secondary py-4 pl-12 pr-4 font-serif italic text-lg text-primary placeholder:text-outline/50" placeholder="Search the collection (e.g., Ming Dynasty Vase)" type="text"/>
+</div>
+<button class="flex items-center gap-2 px-8 py-4 bg-primary text-on-primary whitespace-nowrap hover:bg-primary-container transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+<span class="font-label text-xs uppercase tracking-widest">Refine Search</span>
+</button>
+</div>
+<!-- Quick Active Filters -->
+<div class="flex flex-wrap gap-2 mt-6">
+<span class="text-xs font-label uppercase tracking-widest text-outline mr-4 flex items-center">Active:</span>
+<div class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs flex items-center gap-1">
+<span>European Origin</span>
+<span class="material-symbols-outlined text-[14px] cursor-pointer" data-icon="close">close</span>
+</div>
+<div class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs flex items-center gap-1">
+<span>Victorian Era</span>
+<span class="material-symbols-outlined text-[14px] cursor-pointer" data-icon="close">close</span>
+</div>
+</div>
+</section>
+<div class="flex flex-col lg:flex-row gap-16">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-72 flex-shrink-0">
+<div class="sticky top-32 space-y-12">
+<div>
+<h3 class="font-serif text-lg text-primary mb-6 border-b border-outline-variant/20 pb-2">Era &amp; Century</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded-sm border-outline-variant text-secondary focus:ring-secondary/20" type="checkbox"/>
+<span class="font-label text-xs uppercase tracking-wider text-on-surface-variant group-hover:text-primary">Victorian (1837–1901)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded-sm border-outline-variant text-secondary focus:ring-secondary/20" type="checkbox"/>
+<span class="font-label text-xs uppercase tracking-wider text-on-surface-variant group-hover:text-primary">Ming Dynasty (1368–1644)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded-sm border-outline-variant text-secondary focus:ring-secondary/20" type="checkbox"/>
+<span class="font-label text-xs uppercase tracking-wider text-on-surface-variant group-hover:text-primary">Industrial Era (1760–1840)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded-sm border-outline-variant text-secondary focus:ring-secondary/20" type="checkbox"/>
+<span class="font-label text-xs uppercase tracking-wider text-on-surface-variant group-hover:text-primary">Mid-Century Modern</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="font-serif text-lg text-primary mb-6 border-b border-outline-variant/20 pb-2">Origin</h3>
+<div class="grid grid-cols-2 gap-2">
+<button class="text-left font-label text-[10px] uppercase tracking-widest px-3 py-2 border border-outline-variant/30 hover:border-secondary transition-colors">Europe</button>
+<button class="text-left font-label text-[10px] uppercase tracking-widest px-3 py-2 border border-outline-variant/30 hover:border-secondary transition-colors">Asia</button>
+<button class="text-left font-label text-[10px] uppercase tracking-widest px-3 py-2 border border-outline-variant/30 hover:border-secondary transition-colors">Americas</button>
+<button class="text-left font-label text-[10px] uppercase tracking-widest px-3 py-2 border border-outline-variant/30 hover:border-secondary transition-colors">Africa</button>
+</div>
+</div>
+<div>
+<h3 class="font-serif text-lg text-primary mb-6 border-b border-outline-variant/20 pb-2">Price Range</h3>
+<div class="px-2">
+<div class="h-1 bg-surface-container-highest relative rounded-full mb-4">
+<div class="absolute left-1/4 right-1/4 h-full bg-secondary rounded-full"></div>
+<div class="absolute left-1/4 top-1/2 -translate-y-1/2 w-4 h-4 bg-primary border-2 border-surface rounded-full shadow-md"></div>
+<div class="absolute right-1/4 top-1/2 -translate-y-1/2 w-4 h-4 bg-primary border-2 border-surface rounded-full shadow-md"></div>
+</div>
+<div class="flex justify-between font-label text-[10px] uppercase tracking-widest text-outline">
+<span>$1,000</span>
+<span>$50,000+</span>
+</div>
+</div>
+</div>
+<div class="p-6 bg-surface-container-low border border-secondary/10">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label text-xs uppercase tracking-widest font-semibold text-primary">Expert Verified</span>
+<div class="w-10 h-5 bg-secondary rounded-full relative cursor-pointer">
+<div class="absolute right-0.5 top-0.5 w-4 h-4 bg-surface rounded-full shadow-sm"></div>
+</div>
+</div>
+<p class="text-[11px] leading-relaxed text-on-surface-variant font-light italic">Only show items authenticated by our board of archival curators.</p>
+</div>
+</div>
+</aside>
+<!-- Main Content: Artifact Grid -->
+<div class="flex-grow">
+<div class="editorial-grid">
+<!-- Item 1 -->
+<div class="col-span-12 md:col-span-6 lg:col-span-7 artifact-card group">
+<div class="bg-surface-container shadow-2xl shadow-on-background/5 transition-transform duration-500 group-hover:-translate-y-2">
+<img class="w-full h-[500px] object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700" data-alt="Close-up of an ornate 18th-century French mantle clock with gold leaf details and intricate floral engravings, soft window light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfq1OmD29sDMs938IpyLdJiCrL6aAaySiQTzidKZGkIyFF4qY1bl7s--2Eb6kOcvGhyD6cDK-UcXXhOMCj9fgFwacDQkqsHVA5fg8KiQu73hY50TZyrVKQob9GZ-Ynli2UPMLQ1Mk10FV6e2d1EtVGH1XNG9zGdV3hk-tdyMuCtFN1GNQximbK2pm39tsIytFkEKp7Rl8m-lutvcBKK_bCJJjwFIcJxL9TO47UfPSMdtJphLgv_Oy1MBE7m5Uzy67TgEpyExvMCg"/>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h2 class="font-headline text-2xl text-primary mb-1">Gilded Louis XIV Mantle Clock</h2>
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-outline">CIRCA 1715 • PARIS</span>
+</div>
+<span class="font-headline text-xl text-secondary">$12,450</span>
+</div>
+<div class="flex items-center gap-4 border-t border-outline-variant/10 pt-6">
+<div class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-label uppercase tracking-widest">Exhibited: Louvre 1922</div>
+<span class="font-label text-[10px] uppercase text-on-surface-variant tracking-widest ml-auto">Maison d'Artiste</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="col-span-12 md:col-span-6 lg:col-span-5 artifact-card group">
+<div class="bg-surface-container shadow-2xl shadow-on-background/5 transition-transform duration-500 group-hover:-translate-y-2">
+<img class="w-full h-[400px] object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700" data-alt="Exquisite Japanese Meiji period satsuma vase with hand-painted warriors and gold enameling on a cream background, studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGss_FHLLckRx_DajDfLQ8NxnGjyKGLbpckWgjN4wgrBegWquEyGfDNNPT5bJoAKsDhZToq7Dc6PlMc7aS2CrOHTUO-ssHJFueBMDjceTunx5sA8jiYBTvnV6UmTJCMgvWViKtCNU5v6ENOdwZW2lcxBRCS075uvLvCDMtGVPhbJk923OyYtUWQ96C41ztjHCB6rSMkaotgjEh2LsBwV-ZpZFt1kk3rKTJ2Fvyp6tf5T8RUNXjOnYRdrY7Zrw34HP2a9en6Xwm_A"/>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h2 class="font-headline text-2xl text-primary mb-1">Imperial Satsuma Vase</h2>
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-outline">CIRCA 1890 • KYOTO</span>
+</div>
+<span class="font-headline text-xl text-secondary">$8,200</span>
+</div>
+<div class="flex items-center gap-4 border-t border-outline-variant/10 pt-6">
+<div class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-label uppercase tracking-widest">Imperial Seal</div>
+<span class="font-label text-[10px] uppercase text-on-surface-variant tracking-widest ml-auto">The Silk Road Antiques</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="col-span-12 md:col-span-6 lg:col-span-4 artifact-card group">
+<div class="bg-surface-container shadow-2xl shadow-on-background/5 transition-transform duration-500 group-hover:-translate-y-2">
+<img class="w-full h-[350px] object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700" data-alt="Antique French Rococo walnut armchair with emerald velvet upholstery and hand-carved cabriole legs, elegant museum setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8fX4-7QIv-wK_lxcE4mTNQHhAFEeBplRnCQcApZF4JaXeJfvaFbxufvhG6CQJ3txcK7ewgGQjl8TyXOpZaHCKpViT6ro5h28KWcKvR0zxSsAXEjGIpc3SUA2JKOeFStZIsJs0Rk00uEDtX4lpP_vDoggj3SLdVhs90jjOzdi8d_l2RQIOhQgDHARnRNVoqH4lTZy9HRYIWdZzHJ-9hFMeOvT0P054LHqlFRlXoq4d7jpD5bQrmKrklcJMIQgTeAvJaSo7useU0w"/>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h2 class="font-headline text-xl text-primary mb-1">Velvet Bergère Chair</h2>
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-outline">CIRCA 1765 • LYON</span>
+</div>
+<span class="font-headline text-lg text-secondary">$4,250</span>
+</div>
+<div class="flex flex-col gap-3 border-t border-outline-variant/10 pt-6">
+<div class="w-fit px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-label uppercase tracking-widest">Royal Provenance</div>
+<span class="font-label text-[10px] uppercase text-on-surface-variant tracking-widest">Heritage Furnishings</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="col-span-12 md:col-span-6 lg:col-span-8 artifact-card group">
+<div class="bg-surface-container shadow-2xl shadow-on-background/5 transition-transform duration-500 group-hover:-translate-y-2">
+<div class="grid grid-cols-1 md:grid-cols-2">
+<img class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700" data-alt="Collection of ornate 19th-century silver tableware including a tea set and tray with elaborate baroque engravings" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzSn4mNTIHRxunxekvjr3NRE4rQW2IJF6o5_tSMn7RePiFUpTVjSx_eoobDhL1LBxZ2259EwQPRP39Q9SXADHlRoNtccA9NQ3GxNRozmqYntUloPjs7M7MfO3wIrLDaJZ5NZq8vmspK-l77fcp0gJmzf_-RzkHTDEV1GbQ960N7QcOidY-XsQTMDEpiirmlzor4qWfR7Y0LJGi2BKpAbJefwIJO5VzRV9klFQXmBixTnJYSstHFX457NSmyDrTB96ACqMR4Eu7Vg"/>
+<div class="p-10 flex flex-col justify-center">
+<div class="mb-8">
+<h2 class="font-headline text-3xl text-primary mb-2 leading-tight">Sterling Silver Tea Service</h2>
+<span class="font-label text-xs uppercase tracking-[0.3em] text-outline">CIRCA 1845 • LONDON</span>
+</div>
+<p class="text-sm text-on-surface-variant font-light mb-8 leading-relaxed italic">
+                                        A complete Victorian tea service crafted by master silversmiths, featuring high-relief chasing and acanthus leaf motifs.
+                                    </p>
+<div class="flex justify-between items-end">
+<div>
+<span class="block font-label text-[10px] uppercase tracking-widest text-outline mb-1">OFFERED AT</span>
+<span class="font-headline text-2xl text-secondary">$18,900</span>
+</div>
+<div class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-label uppercase tracking-widest">Hallmarked 1845</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<nav class="mt-24 flex items-center justify-center gap-12">
+<button class="flex items-center gap-2 font-label text-xs uppercase tracking-[0.2em] text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+                        Previous
+                    </button>
+<div class="flex items-center gap-8">
+<a class="font-headline text-lg text-secondary border-b-2 border-secondary px-1" href="#">1</a>
+<a class="font-headline text-lg text-outline hover:text-primary transition-colors" href="#">2</a>
+<a class="font-headline text-lg text-outline hover:text-primary transition-colors" href="#">3</a>
+<span class="text-outline">...</span>
+</div>
+<button class="flex items-center gap-2 font-label text-xs uppercase tracking-[0.2em] text-primary hover:text-secondary transition-colors">
+                        Next Curator
+                        <span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</nav>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-24 py-16 bg-[#efefd7] dark:bg-stone-900 border-t border-[#d4c3be]/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 w-full max-w-screen-2xl mx-auto space-y-8 md:space-y-0">
+<div class="flex flex-col gap-2">
+<span class="font-serif text-lg tracking-widest text-[#442a22] font-bold">THE ARCHIVIST</span>
+<p class="font-sans text-[0.75rem] uppercase tracking-[0.1em] text-[#442a22] dark:text-stone-300">
+                    © 2024 THE DIGITAL ARCHIVIST. PRESERVING HERITAGE.
+                </p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-sans text-[0.75rem] uppercase tracking-[0.1em] text-[#5d4037] dark:text-stone-500 hover:underline decoration-[#775a19] decoration-2 underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">The Manifesto</a>
+<a class="font-sans text-[0.75rem] uppercase tracking-[0.1em] text-[#5d4037] dark:text-stone-500 hover:underline decoration-[#775a19] decoration-2 underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Valuation Services</a>
+<a class="font-sans text-[0.75rem] uppercase tracking-[0.1em] text-[#5d4037] dark:text-stone-500 hover:underline decoration-[#775a19] decoration-2 underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Shipping &amp; Handling</a>
+<a class="font-sans text-[0.75rem] uppercase tracking-[0.1em] text-[#5d4037] dark:text-stone-500 hover:underline decoration-[#775a19] decoration-2 underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy Policy</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#442a22]" data-icon="verified_user">verified_user</span>
+<span class="material-symbols-outlined text-[#442a22]" data-icon="history_edu">history_edu</span>
+</div>
+</div>
+</footer>
+</body></html>

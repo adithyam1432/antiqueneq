@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Seller Atelier | THE ARCHIVIST</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "surface-bright": "#fbfbe2",
+                "on-error": "#ffffff",
+                "on-tertiary-fixed-variant": "#5b4137",
+                "on-primary-container": "#d4ada1",
+                "secondary-fixed": "#ffdea5",
+                "error": "#ba1a1a",
+                "primary-container": "#5d4037",
+                "tertiary-fixed": "#ffdbce",
+                "surface-tint": "#77574d",
+                "inverse-primary": "#e7bdb1",
+                "on-tertiary-fixed": "#2b160f",
+                "on-primary": "#ffffff",
+                "on-surface": "#1b1d0e",
+                "on-primary-fixed-variant": "#5d4037",
+                "on-surface-variant": "#504441",
+                "primary": "#442a22",
+                "on-tertiary-container": "#d2aea1",
+                "on-primary-fixed": "#2c160e",
+                "tertiary": "#432b22",
+                "secondary-fixed-dim": "#e9c176",
+                "surface-container-low": "#f5f5dc",
+                "on-background": "#1b1d0e",
+                "tertiary-fixed-dim": "#e4beb2",
+                "primary-fixed": "#ffdbd0",
+                "on-tertiary": "#ffffff",
+                "on-error-container": "#93000a",
+                "surface-dim": "#dbdcc3",
+                "inverse-on-surface": "#f2f2d9",
+                "on-secondary": "#ffffff",
+                "surface-container-lowest": "#ffffff",
+                "surface-container": "#efefd7",
+                "tertiary-container": "#5b4137",
+                "outline-variant": "#d4c3be",
+                "on-secondary-fixed": "#261900",
+                "surface-container-highest": "#e4e4cc",
+                "surface-container-high": "#eaead1",
+                "inverse-surface": "#303221",
+                "secondary": "#775a19",
+                "on-secondary-container": "#785a1a",
+                "surface": "#fbfbe2",
+                "secondary-container": "#fed488",
+                "outline": "#827470",
+                "primary-fixed-dim": "#e7bdb1",
+                "on-secondary-fixed-variant": "#5d4201",
+                "background": "#fbfbe2",
+                "error-container": "#ffdad6",
+                "surface-variant": "#e4e4cc"
+              },
+              fontFamily: {
+                "headline": ["Noto Serif"],
+                "body": ["Work Sans"],
+                "label": ["Work Sans"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbfbe2;
+            color: #442a22;
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-secondary-container">
+<!-- NavigationDrawer Shell -->
+<aside class="fixed left-0 top-0 h-full flex flex-col h-screen w-64 bg-[#fbfbe2] dark:bg-[#1b1d0e]">
+<div class="px-8 py-10">
+<h1 class="text-xl font-bold tracking-tighter text-[#442a22] dark:text-[#fbfbe2]">THE ARCHIVIST</h1>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Dashboard Active -->
+<a class="flex items-center gap-4 px-6 py-4 bg-[#efefd7] dark:bg-[#252814] text-[#775a19] dark:text-[#fed488] font-bold border-r-4 border-[#775a19] transition-all opacity-90" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-serif text-[#442a22] uppercase tracking-widest text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#442a22] dark:text-[#d4c3be] hover:bg-[#efefd7]/50 hover:text-[#775a19] transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-serif text-[#442a22] uppercase tracking-widest text-sm">Catalog</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#442a22] dark:text-[#d4c3be] hover:bg-[#efefd7]/50 hover:text-[#775a19] transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-serif text-[#442a22] uppercase tracking-widest text-sm">Authentications</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#442a22] dark:text-[#d4c3be] hover:bg-[#efefd7]/50 hover:text-[#775a19] transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="font-serif text-[#442a22] uppercase tracking-widest text-sm">Orders</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#442a22] dark:text-[#d4c3be] hover:bg-[#efefd7]/50 hover:text-[#775a19] transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-serif text-[#442a22] uppercase tracking-widest text-sm">Payments</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#442a22] dark:text-[#d4c3be] hover:bg-[#efefd7]/50 hover:text-[#775a19] transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-serif text-[#442a22] uppercase tracking-widest text-sm">Profile</span>
+</a>
+</nav>
+<div class="p-8">
+<div class="p-4 bg-surface-container rounded-sm">
+<p class="text-[10px] font-bold tracking-[0.2em] uppercase text-outline">Merchant ID</p>
+<p class="text-xs font-mono">ARC-7721-X</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-screen bg-surface">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-12 py-8 bg-[#fbfbe2]/80 dark:bg-[#1b1d0e]/80 backdrop-blur-md sticky top-0 z-10 shadow-sm dark:shadow-none opacity-100 transition-all">
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:text-secondary">menu</span>
+<h2 class="text-lg font-serif uppercase tracking-widest text-[#442a22] dark:text-[#fbfbe2]">Seller Atelier</h2>
+</div>
+<div class="flex items-center gap-8">
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-none font-label text-xs font-bold tracking-widest uppercase hover:border-b-2 hover:border-secondary transition-all active:scale-95">
+                    Submit Artifact for Authentication
+                </button>
+<div class="h-10 w-10 bg-surface-container-highest rounded-full overflow-hidden border border-outline-variant/20">
+<img alt="Seller Profile Portrait" class="h-full w-full object-cover" data-alt="Professional portrait of an elegant elderly antique appraiser in a tailored brown suit with a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-_sB2ftSmyjgvab7es4mCCffhUw8HliliRLxlpso18fGt61RnCGe-AjPJRSdYVtx5_lQndlP6twOEnWFbbTaCfpLRtAjrZp9r4Iv5KUp2xII2Dnll6_ajGpznOv255S356svqW8bX_4z0wncLDX6seJZmStm2vHhKjl3uZs7QX_oJCxVfNZdo-RD6ayn6JqIQ0g-o1giO6M2Z4tQ9BhIEQp9MfYTO-jX9g0pCSe13VXH6PTWTB1Ztd8yLuxbZ8j1Pw5pllSM8fQ"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="px-12 py-12 space-y-16">
+<!-- Hero Stats: Bento Grid Style -->
+<section class="grid grid-cols-12 gap-6">
+<div class="col-span-8 bg-secondary p-12 flex flex-col justify-between min-h-[300px] relative overflow-hidden">
+<div class="relative z-10">
+<span class="text-on-secondary font-label text-[10px] tracking-[0.3em] uppercase">Liquidity Overview</span>
+<h3 class="font-headline text-5xl text-on-secondary mt-2 font-bold italic tracking-tighter">Earnings to Date</h3>
+</div>
+<div class="relative z-10">
+<p class="text-on-secondary font-headline text-7xl font-bold tracking-tight">$142,850.00</p>
+<div class="mt-4 flex items-center gap-2 text-on-secondary/80">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-xs font-label tracking-widest uppercase">12.4% vs Last Quarter</span>
+</div>
+</div>
+<!-- Decorative texture -->
+<div class="absolute right-[-10%] bottom-[-10%] opacity-10">
+<span class="material-symbols-outlined text-[240px]">payments</span>
+</div>
+</div>
+<div class="col-span-4 bg-surface-container-low p-10 flex flex-col justify-center text-center space-y-4">
+<span class="material-symbols-outlined text-secondary text-5xl mx-auto" style="font-variation-settings: 'FILL' 1;">verified</span>
+<div>
+<p class="font-label text-[10px] tracking-[0.3em] uppercase text-primary/60">Registry Count</p>
+<h3 class="font-headline text-6xl text-primary font-bold mt-2">84</h3>
+</div>
+<p class="font-serif italic text-primary/70 text-sm">Verified Artifacts in Repository</p>
+<div class="pt-4">
+<button class="text-primary font-label text-[10px] font-bold tracking-widest uppercase underline-offset-4 hover:underline">View Registry</button>
+</div>
+</div>
+</section>
+<!-- Recent Orders Section -->
+<section class="space-y-8">
+<div class="flex justify-between items-end">
+<div>
+<h4 class="font-headline text-3xl italic text-primary">Recent Orders</h4>
+<p class="font-serif text-sm text-primary/60 mt-1">Acquisitions finalized within the last 30 cycles.</p>
+</div>
+<button class="font-label text-xs font-bold tracking-widest uppercase text-secondary hover:opacity-70 transition-opacity">Export Ledger</button>
+</div>
+<!-- Custom Table using Background Shifts (No Borders Rule) -->
+<div class="space-y-4">
+<!-- Header -->
+<div class="flex px-8 py-4 bg-surface text-primary/40 font-label text-[10px] tracking-[0.2em] uppercase font-bold">
+<div class="w-[30%]">Artifact Name</div>
+<div class="w-[20%]">Buyer</div>
+<div class="w-[20%]">Date</div>
+<div class="w-[15%]">Status</div>
+<div class="w-[15%] text-right">Escrow Amount</div>
+</div>
+<!-- Row 1 -->
+<div class="flex items-center px-8 py-6 bg-surface-container-low hover:bg-surface-container transition-colors group">
+<div class="w-[30%] flex items-center gap-4">
+<div class="h-12 w-12 bg-surface-container-highest rounded-sm flex-shrink-0 overflow-hidden">
+<img class="h-full w-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all" data-alt="Macro detail of an ornate 19th century brass telescope lens with subtle patina and dust particles" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpN674P2QM1Ke64nm6ANpcdTeWd6A7--Uio4UWRs7a_zFej7qhjxcmhiicrI3e7azJvIdVQdryKY_UwEbMEb9Z-wRHQS7XfiNUv5oR5EDNnDSW4wJNIousOgNHdiYCpoyoeHFEvWIvDjbgGUYnBNnFjtSIleUdmwDqSdzqi_SYiqWHNl_RmYoU8XnmUKok3HNYeapJHjophNbjYrQwJQQaxX_nDH-hksaCyQadmI8ArhG5sLctI2E9QwSvGV_MtLFbiJiaEkbiKw"/>
+</div>
+<span class="font-headline text-primary text-lg">Victorian Marine Telescope</span>
+</div>
+<div class="w-[20%] font-serif italic text-sm">Lord Julian Finch</div>
+<div class="w-[20%] font-label text-xs tracking-wider text-primary/60">OCT 14, 18:42</div>
+<div class="w-[15%]">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label text-[9px] font-bold uppercase tracking-widest">In Escrow</span>
+</div>
+<div class="w-[15%] text-right font-headline text-xl text-primary">$4,200</div>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center px-8 py-6 bg-surface-container-low hover:bg-surface-container transition-colors group">
+<div class="w-[30%] flex items-center gap-4">
+<div class="h-12 w-12 bg-surface-container-highest rounded-sm flex-shrink-0 overflow-hidden">
+<img class="h-full w-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all" data-alt="Close-up of an aged leather-bound book with gold leaf lettering on the spine resting on a velvet cushion" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAALGjx6j2s8hYoD7yVa2d-4LDnh0fZTbDyuUlhu0hyhjs0ldlKIqLkZRBCXt6TXQt3WHJKfkDOeNG8jg6cNY29u1ruiBYKvZOeZwLCHzshVoyv1DUU_CmLFI-_VGRPB4DS5jceottonUCGLn-Gc_iueJ21-IxQQxNvSferl2LAVYbTcwoL-FeAWB_57mC1NO8ZVbtARkJMNTXbG-0qii9PtdCkHK8LK0gdwFRN1eC4WqkIRY9JWaFoOEQih1G4gziKE5xqJWJMNQ"/>
+</div>
+<span class="font-headline text-primary text-lg">First Edition "Odyssey"</span>
+</div>
+<div class="w-[20%] font-serif italic text-sm">Museum of Antiquity</div>
+<div class="w-[20%] font-label text-xs tracking-wider text-primary/60">OCT 12, 09:15</div>
+<div class="w-[15%]">
+<span class="px-3 py-1 rounded-full bg-surface-container-highest text-primary/40 font-label text-[9px] font-bold uppercase tracking-widest">Complete</span>
+</div>
+<div class="w-[15%] text-right font-headline text-xl text-primary">$12,800</div>
+</div>
+<!-- Row 3 -->
+<div class="flex items-center px-8 py-6 bg-surface-container-low hover:bg-surface-container transition-colors group">
+<div class="w-[30%] flex items-center gap-4">
+<div class="h-12 w-12 bg-surface-container-highest rounded-sm flex-shrink-0 overflow-hidden">
+<img class="h-full w-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all" data-alt="Minimalist top view of a delicate porcelain tea set with faded floral patterns on a dark wood surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuWZzy4qGeMSd0AVHBlBA3rsU91lueP0nn_in26LFZiFVRY8Pu8kNhDhWhkm_hlXkrnzR5SHSkRnf_Qcq8zHkjrHvnTnPBA2Rxk6gbLNEeGRV03R4FuQS7GAiOhRMu1LBuEFiWIame0B5i-UG5fYYWMDl2i4SABJ-JuIlkm66yLJXlXxF_J_yNm9M5d5J8XExXGq12mJTFPBz13beSdLEIKDh94hcj3PMRWRva7Me9pTlR5GWjdR4C9HoBm7yo3in4bUYS7ZrEcg"/>
+</div>
+<span class="font-headline text-primary text-lg">Ming Dynasty Teacup</span>
+</div>
+<div class="w-[20%] font-serif italic text-sm">Elena Valerius</div>
+<div class="w-[20%] font-label text-xs tracking-wider text-primary/60">OCT 11, 21:04</div>
+<div class="w-[15%]">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label text-[9px] font-bold uppercase tracking-widest">In Transit</span>
+</div>
+<div class="w-[15%] text-right font-headline text-xl text-primary">$950</div>
+</div>
+<!-- Row 4 -->
+<div class="flex items-center px-8 py-6 bg-surface-container-low hover:bg-surface-container transition-colors group">
+<div class="w-[30%] flex items-center gap-4">
+<div class="h-12 w-12 bg-surface-container-highest rounded-sm flex-shrink-0 overflow-hidden">
+<img class="h-full w-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all" data-alt="Side profile of a rusted medieval iron gauntlet showing intricate joints and hammer marks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS_WxSHDuAb8YnJ1DIGLPXndixc9od9dubDFVCINRPmMYRt1SHX66ue3QzzsmHthsfh5fgp6Y2m6NzDFIt8Ofjw7Evn9vv72JoBJCPo6SQ-ZtHuwq5GFdDCq7ddf6NqrinMOTH4WoeK0OTAHjPWL3yk5wmRHW5xAOF_X-fiM1FOTAedkGFDgLg6Z5lM20IlsOYLuoaAdBMgjDtxWmt73jLZwYNF8Osl6Rfx0NY16KOueDyXo6rNcoIt6SBNDCksIlBL5Y5Gls1cQ"/>
+</div>
+<span class="font-headline text-primary text-lg">Ironclad Gauntlet (Left)</span>
+</div>
+<div class="w-[20%] font-serif italic text-sm">Arthur Pendragon IV</div>
+<div class="w-[20%] font-label text-xs tracking-wider text-primary/60">OCT 08, 14:30</div>
+<div class="w-[15%]">
+<span class="px-3 py-1 rounded-full bg-error-container text-on-error-container font-label text-[9px] font-bold uppercase tracking-widest">Disputed</span>
+</div>
+<div class="w-[15%] text-right font-headline text-xl text-primary">$2,450</div>
+</div>
+</div>
+</section>
+<!-- Bottom Asymmetric Section: Insights & Marketplace Status -->
+<section class="grid grid-cols-12 gap-12 pb-24">
+<div class="col-span-5 space-y-6">
+<h5 class="font-headline text-2xl italic">Atelier Insights</h5>
+<div class="bg-surface-container p-8 space-y-6">
+<div class="space-y-1">
+<p class="font-label text-[10px] tracking-[0.2em] uppercase font-bold text-secondary">Trending Era</p>
+<p class="font-serif text-lg">Neo-Classical Furniture</p>
+<div class="h-1 w-full bg-surface-container-highest mt-2">
+<div class="h-full bg-secondary w-[75%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<p class="font-label text-[10px] tracking-[0.2em] uppercase font-bold text-secondary">Search Volume</p>
+<p class="font-serif text-lg">"18th Century Timepieces"</p>
+<div class="h-1 w-full bg-surface-container-highest mt-2">
+<div class="h-full bg-secondary w-[40%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-7 bg-primary text-on-primary p-12 flex items-start gap-8">
+<div class="h-full flex flex-col justify-between flex-1">
+<div>
+<h5 class="font-headline text-3xl italic mb-4">Provenance Verified</h5>
+<p class="text-sm font-serif opacity-70 leading-relaxed max-w-sm">
+                                Every item in your catalog has undergone the 12-point authentication protocol. Your seller rating is currently at <span class="text-secondary font-bold">Grade A (Excellence)</span>.
+                            </p>
+</div>
+<div class="flex gap-4 mt-8">
+<button class="bg-secondary text-white px-6 py-3 font-label text-[10px] tracking-widest uppercase font-bold hover:opacity-90 transition-opacity">Review Protocols</button>
+<button class="border border-white/20 px-6 py-3 font-label text-[10px] tracking-widest uppercase font-bold hover:bg-white/10 transition-colors">Trust Report</button>
+</div>
+</div>
+<div class="w-48 h-48 bg-white/5 rounded-full flex items-center justify-center p-6 border border-white/10">
+<span class="material-symbols-outlined text-8xl text-secondary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

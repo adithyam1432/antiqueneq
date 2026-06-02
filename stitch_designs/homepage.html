@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Digital Archivist | Antique Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300&amp;family=Work+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-fixed": "#ffdbd0",
+                        "surface": "#fbfbe2",
+                        "secondary-container": "#fed488",
+                        "surface-dim": "#dbdcc3",
+                        "on-primary-container": "#d4ada1",
+                        "surface-container-highest": "#e4e4cc",
+                        "surface-container-high": "#eaead1",
+                        "surface-tint": "#77574d",
+                        "surface-bright": "#fbfbe2",
+                        "on-secondary-container": "#785a1a",
+                        "tertiary": "#432b22",
+                        "outline": "#827470",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f5f5dc",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "secondary-fixed": "#ffdea5",
+                        "on-secondary-fixed": "#261900",
+                        "on-tertiary-container": "#d2aea1",
+                        "tertiary-fixed-dim": "#e4beb2",
+                        "error": "#ba1a1a",
+                        "background": "#fbfbe2",
+                        "surface-container": "#efefd7",
+                        "inverse-surface": "#303221",
+                        "primary-fixed-dim": "#e7bdb1",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "primary": "#442a22",
+                        "on-primary-fixed-variant": "#5d4037",
+                        "tertiary-fixed": "#ffdbce",
+                        "on-background": "#1b1d0e",
+                        "inverse-on-surface": "#f2f2d9",
+                        "secondary-fixed-dim": "#e9c176",
+                        "on-surface": "#1b1d0e",
+                        "surface-variant": "#e4e4cc",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#d4c3be",
+                        "inverse-primary": "#e7bdb1",
+                        "secondary": "#775a19",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#5b4137",
+                        "primary-container": "#5d4037",
+                        "on-tertiary-fixed": "#2b160f",
+                        "on-surface-variant": "#504441",
+                        "on-primary-fixed": "#2c160e",
+                        "on-tertiary-fixed-variant": "#5b4137",
+                        "on-secondary": "#ffffff"
+                    },
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Work Sans"],
+                        "label": ["Work Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-asymmetry {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="bg-[#fbfbe2]/80 dark:bg-stone-900/80 backdrop-blur-md text-[#442a22] dark:text-stone-100 docked full-width top-0 z-50 no-border tonal-shift-bg flat no shadows flex justify-between items-center w-full px-8 py-4 max-w-full sticky">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-2xl p-2 hover:bg-stone-200/20 transition-colors duration-300 scale-98 active:opacity-80 transition-all">menu</button>
+<span class="text-2xl font-serif italic text-[#442a22] dark:text-stone-100 font-['Noto_Serif'] font-light tracking-tight">The Digital Archivist</span>
+</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-[#775a19] dark:text-amber-500 font-medium border-b-2 border-[#775a19] font-['Noto_Serif'] font-light tracking-tight hover:bg-stone-200/20 transition-colors duration-300" href="#">Home</a>
+<a class="text-[#442a22] dark:text-stone-300 hover:text-[#775a19] font-['Noto_Serif'] font-light tracking-tight hover:bg-stone-200/20 transition-colors duration-300" href="#">Browse Antiques</a>
+<a class="text-[#442a22] dark:text-stone-300 hover:text-[#775a19] font-['Noto_Serif'] font-light tracking-tight hover:bg-stone-200/20 transition-colors duration-300" href="#">Sellers</a>
+<a class="text-[#442a22] dark:text-stone-300 hover:text-[#775a19] font-['Noto_Serif'] font-light tracking-tight hover:bg-stone-200/20 transition-colors duration-300" href="#">Archive</a>
+</nav>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-xl hover:bg-stone-200/20 transition-colors duration-300">search</button>
+<button class="text-[#442a22] dark:text-stone-100 font-['Noto_Serif'] font-light tracking-tight px-4 py-1 border border-outline/20 hover:bg-stone-200/20 transition-all duration-300 scale-98 active:opacity-80">LOGIN</button>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative h-[751px] flex items-center overflow-hidden bg-primary-container">
+<div class="absolute inset-0 z-0">
+<img alt="Antique desk" class="w-full h-full object-cover opacity-60 mix-blend-luminosity" data-alt="Close-up of a dark mahogany antique secretary desk with intricate wood carvings and soft warm lighting hitting the polished surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZJlXEeSVtouANUOM0RqlRJet06QwZOdHHCnW2dphRFnOsa6C-XqL_1JHa8qpj4Mrl94gZpOxcJ2os4iJUQPcc5reon8964JGuAB-UVCs8KezW-axoJpBszrkAU8PzqjBroZQ_CXDvb_3-U7C9MeSs3b_zYMGzI86CEnQgE9JfGcNpcz0qTKeTpsvB3lXTjg9iA2fMIkQ3L8q6NzPepafLtjP-D_o4x4UXCq1DoJ2kct_pS0i_EMSe6tiPnA-AXavIEWwDU5dBvQ"/>
+<div class="absolute inset-0 bg-gradient-to-tr from-primary via-primary/40 to-transparent"></div>
+</div>
+<div class="relative z-10 px-8 md:px-20 max-w-5xl">
+<span class="font-label text-xs tracking-[0.2em] text-secondary uppercase mb-4 block">Est. 1924 • Curated Excellence</span>
+<h1 class="font-headline text-5xl md:text-7xl text-surface-bright leading-tight mb-8 max-w-3xl -ml-1 italic font-light tracking-tight">
+                    Discover Authentic Antiques with a Story to Tell.
+                </h1>
+<div class="flex flex-col md:flex-row gap-4 items-stretch md:items-center max-w-2xl bg-surface/10 backdrop-blur-md p-2 border border-surface/20">
+<div class="flex-grow flex items-center px-4 gap-3 bg-surface-container-lowest/10">
+<span class="material-symbols-outlined text-surface-bright/70">search</span>
+<input class="bg-transparent border-none text-surface-bright placeholder:text-surface-bright/50 focus:ring-0 w-full py-4 font-body" placeholder="Search by era, artisan, or origin..." type="text"/>
+</div>
+<button class="bg-secondary text-on-secondary px-10 py-4 font-label text-xs tracking-widest uppercase transition-all duration-300 hover:bg-secondary/90 active:scale-95 whitespace-nowrap">
+                        Begin Search
+                    </button>
+</div>
+</div>
+</section>
+<!-- Signature Categories (Bento Style) -->
+<section class="py-24 px-8 md:px-20 bg-surface">
+<div class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="max-w-xl">
+<h2 class="font-headline text-4xl text-primary mb-4">The Curator's Selection</h2>
+<p class="text-on-surface-variant font-body leading-relaxed">Each piece in our archive is verified by global experts to ensure heritage and value beyond measure.</p>
+</div>
+<button class="text-primary font-label text-xs tracking-[0.2em] uppercase border-b border-primary/20 pb-1 hover:border-secondary transition-colors">View All Collections</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-auto md:h-[700px]">
+<div class="md:col-span-7 relative group overflow-hidden bg-surface-container-low cursor-pointer">
+<img alt="Antique Furniture" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Exquisite 18th century French rococo style armoire made of walnut with intricate floral carvings in a bright minimalist gallery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCitO8bNclpE_53aKbBoVkLCoCbplWrP5ZLX9FD4mRwq6RlFEavdkFxQWNELgr8HZcL-e3aW50lQMv0TNLwc5_-hWuJ0KxTPEFwaKPZRfBdAJA6EhoXuKmHe0MMHMb_xvlxhG4-OUy0_rM-1W4lwH41V0RnxG1bOk9SYECpodRGH6F1mbSteBBbehL6-Hspx27VwQTtgNteZXixuJhkY1TnKNGPfYFbUm8UWIZrkWehGsxBl0kY26aUJJc4_2hQtXnn053Upst77w"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-10 left-10 text-surface">
+<span class="font-label text-[10px] tracking-widest uppercase block mb-2 opacity-80">Collection 01</span>
+<h3 class="font-headline text-3xl mb-4 italic">Period Furniture</h3>
+<p class="text-surface/70 font-body text-sm max-w-xs">Hand-carved legacies from the Renaissance to Art Deco.</p>
+</div>
+</div>
+<div class="md:col-span-5 grid grid-rows-2 gap-8">
+<div class="relative group overflow-hidden bg-surface-container-low cursor-pointer">
+<img alt="Luxury Watches" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close-up of a vintage brass pocket watch with visible internal gears and Roman numerals resting on aged parchment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI0GVrv8OpuLhL7YnWrPmNGDl2QIM_ZLQXsC6faTNGn8qCxbYR9FsCYkxIC1K4LN5kBsUeHYlGpOJen0Qua3-Qv_rk8i-BH-6_qKnZfe9b2in70NN-2dpJeVn4kC1Z2X6IcpDLcYwTn6iDu-OBdDz4S6zzrrHcvfM3FoY1ikFLoshgoTIjeD7ZPPzXBd7mCIAJXojIzmlPCp2Oy-dy5oXXQzX3WYytR07q8N1UupzFW1nZw_AfcoYvWx5XCjPDdtc966lq9oewGw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-8 left-8 text-surface">
+<h3 class="font-headline text-2xl italic">Horology &amp; Clocks</h3>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="relative group overflow-hidden bg-surface-container-low cursor-pointer">
+<img alt="Fine Jewelry" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Antique emerald and gold ring set against a dark velvet background with soft directional light catching the gemstone" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALQUl-B2Dx-_ej1-pzcgdmKo83a1Wyuy9qzcDhNkh28nOOsNyyvCdEX3_guyhe8hGXwxIwNphvUsjPYAPm7QBRFvgvDosl-DKSVwuzo3_1oUUbmndAHQgYTkYMSkKlbj9Eyn8HXCRUytjaaB290Zyp0NpO9SFnxZZSQfzvJbr1wM6pWpW6JIFzAPfUZDBi7zTY6aA4v36KRz1lc5-mM6cA19bs7dBOZY-gJzNQeVHDNiJwqGeIHosbmTbKcr4hqmABsB3ACJomAg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-surface">
+<h3 class="font-headline text-xl italic">Fine Jewelry</h3>
+</div>
+</div>
+<div class="relative group overflow-hidden bg-surface-container-low cursor-pointer">
+<img alt="Fine Art" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Ornate gilded gold picture frame empty against a dark moody wall with dramatic shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANcviuhZw0gniFE7EPryEeg4dyzPvPEIG_OYLvp2BBOxgfRd3G_viFdrIuO8n6Cw0-iYX-ZJ0-dewdf5XCZzh9sHoUDXCYQJ1PJngwsIb_m83B4obMYGr0M57sOZJmjpBJmf-N6k4Sg0n17KyPzyoJDMc7UR1vE5aKfAiD4BgtxHihXF-7ZA5cDAqFtmR22cD6XvChtW6HpTJavjF8lRaufZuf_zRl7hR3OQqAwWCqIGoMBboI6jhsOgLVqkN5R-oqiFfGBBDvVA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-surface">
+<h3 class="font-headline text-xl italic">Estate Art</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Expert Verified Grid -->
+<section class="py-24 px-8 md:px-20 bg-surface-container-low">
+<div class="text-center mb-20">
+<span class="font-label text-xs tracking-[0.3em] text-secondary uppercase block mb-4">Marketplace Highlight</span>
+<h2 class="font-headline text-5xl text-primary font-light italic">Expert Verified Artifacts</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-16">
+<!-- Item 1 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] overflow-hidden mb-6 bg-surface-container-highest rounded-sm shadow-sm">
+<img alt="Regency Mirror" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" data-alt="Victorian era silver hand mirror with ornate floral relief designs on a weathered marble table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc_BzcgYtmR0Uxc8_Tx_tUVsi8Nt-EBXJHHEm81GNHgWn_jEcUgtXqdsc_gvJfHlzMUYagQltZ5AJu5Jr0qWai9svyy8BFHXmQGq8geY0EEho6XlwK5_DcYjminwDHYp_TLFKKrSeqxWbCqvn5V2o88uOR5a_AAjC7XigG91ODIK61m4FUY5ZdqlUQgo10kJ6aqg1Y9K38EaDW-BhWA8UQ8PD5iKgZ9HDwsZhoRxwMPvmE676MkL3LB3kZKQ3Q-1us5sWVcwdrjg"/>
+<div class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-label font-bold tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
+                            VERIFIED
+                        </div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline text-xl text-primary leading-tight group-hover:text-secondary transition-colors">Victorian Silver Mirror</h4>
+<span class="font-body font-medium text-tertiary">$2,450</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label text-[10px] tracking-widest text-on-surface-variant uppercase">CIRCA 1885 • LONDON</span>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-[10px] font-label text-on-surface-variant uppercase">Kensington Gallery</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] overflow-hidden mb-6 bg-surface-container-highest rounded-sm shadow-sm">
+<img alt="Porcelain Vase" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" data-alt="Ming dynasty style blue and white porcelain vase with dragon motifs on a simple dark wooden plinth" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEaGR9NI190sFTSrPbvRXzKdc2UNnYVrp7yZy7RDQnEjDaBMSnYdugxyhSxRzL8Vkd4a4eWqRhM0h07vNP34yi5Uhyk16J51AsRZx4pbdy6kRtcCKmK1m-CLSqXcmzihDteIjSwoe0u2S_HyRVtg_QrvgmUQPXyHu0ceNYen3eCrTIlVgoPMF5PhPsFYYOHf1KXn_GcqhbD6Fj8R6Tpg87t7fdyPZgiDVcAIpaBAfW7Q8yNYaotPph9z825rvo1HOABWmlcuZJrQ"/>
+<div class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-label font-bold tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
+                            VERIFIED
+                        </div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline text-xl text-primary leading-tight group-hover:text-secondary transition-colors">Ming Dynasty Style Vase</h4>
+<span class="font-body font-medium text-tertiary">$18,900</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label text-[10px] tracking-widest text-on-surface-variant uppercase">17TH CENTURY • JINGDEZHEN</span>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-[10px] font-label text-on-surface-variant uppercase">Heritage Arts Ltd</span>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] overflow-hidden mb-6 bg-surface-container-highest rounded-sm shadow-sm">
+<img alt="Oak Desk" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" data-alt="Industrial vintage drafting table with cast iron legs and a weathered oak top in a sunlit studio space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC91WGe0HbtFJyxXvubEwkMHGkdamikcxFIcqaD4zZQm2WxAz2LZeNnwHxKPAFwGTHhey7qQnVocFdqPa_Xye-tSeurOrBvWS7ej0j2PqZPIXFSpmScGOyHFB9xIGo2QQyOeY0Xf7zQFJGGFvSnFy9o_0mG_wc7hpO2nIzbwfn-vFOw1Pg1hKA90spzCk38R_UaBc5VL4XB7p7YgZ59P3-u3uBDThxgUnvmWirzUN9Z-0rCXKrSVwP-FxqRXM7fbsuKP5q2ar3v7Q"/>
+<div class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-label font-bold tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
+                            VERIFIED
+                        </div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline text-xl text-primary leading-tight group-hover:text-secondary transition-colors">Industrial Drafting Table</h4>
+<span class="font-body font-medium text-tertiary">$4,100</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label text-[10px] tracking-widest text-on-surface-variant uppercase">CIRCA 1920 • CHICAGO</span>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-[10px] font-label text-on-surface-variant uppercase">The Iron Curator</span>
+</div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] overflow-hidden mb-6 bg-surface-container-highest rounded-sm shadow-sm">
+<img alt="Persian Rug" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" data-alt="Intricate crimson and gold hand-knotted Persian silk rug with detailed geometric borders on a dark floor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYkKcKuVz7t1Sg1RERzopcx7bbUW3ACRUoZl8myZ-MZWmTWMnQ7bQ6cYt74bswAu2n3ohRv2dXQImFL6ey9wNHL4UqHHUr8CIzTuqMMvVywMuPIKeCwYeT5uxGuvqnbt_rcYuo3Y3PyYKtodyy1szMVMIADCBfdWUqSv-ejjYVshELF2y_rXWHlK7-rt5su8LBVd6LcufmxyenW0VU6xPHZpx91T0B8bLHtakv6tn1-3tHFAKiB3lC_T1L_0ZMJwRA6IUSUpEVVQ"/>
+<div class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-label font-bold tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
+                            VERIFIED
+                        </div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline text-xl text-primary leading-tight group-hover:text-secondary transition-colors">Kashan Silk Tapestry</h4>
+<span class="font-body font-medium text-tertiary">$12,000</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label text-[10px] tracking-widest text-on-surface-variant uppercase">CIRCA 1910 • PERSIA</span>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-[10px] font-label text-on-surface-variant uppercase">Silk Road Imports</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Section -->
+<section class="py-24 px-8 md:px-20 bg-primary text-surface overflow-hidden relative">
+<div class="absolute right-0 top-0 opacity-10 pointer-events-none">
+<span class="text-[20rem] font-headline italic -mr-40 leading-none">Archivist</span>
+</div>
+<div class="relative z-10 grid md:grid-cols-2 gap-20 items-center">
+<div>
+<span class="font-label text-xs tracking-[0.4em] text-secondary uppercase block mb-6">The Gold Standard</span>
+<h2 class="font-headline text-5xl mb-10 leading-tight">Securing the Legacy of Every Transaction</h2>
+<div class="space-y-8">
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-3xl text-secondary">security</span>
+<div>
+<h4 class="font-headline text-xl mb-2">Integrated Escrow Services</h4>
+<p class="text-surface/70 font-body text-sm leading-relaxed">Your funds are held securely until the artifact is in your possession and verified by your own appraisal.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-3xl text-secondary">history_edu</span>
+<div>
+<h4 class="font-headline text-xl mb-2">Provenance Documentation</h4>
+<p class="text-surface/70 font-body text-sm leading-relaxed">Every item sold through our premium tier includes a blockchain-backed digital certificate of origin.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-3xl text-secondary">local_shipping</span>
+<div>
+<h4 class="font-headline text-xl mb-2">White-Glove Logistics</h4>
+<p class="text-surface/70 font-body text-sm leading-relaxed">Global specialized shipping for fragile antiquities, insured up to $1,000,000.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square bg-surface-container-highest p-1 rounded-sm overflow-hidden rotate-3 shadow-2xl">
+<img alt="Collector at work" class="w-full h-full object-cover" data-alt="Art historian with white gloves carefully examining an old manuscript with a magnifying glass in a library with warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_Kf8PgmYqFU3Dactk0ELWeDRfx8FoQKJEH8HPgov-N-mnZdq-fTrGv5NxA4IQYe_MC9Zu4NyVDI47cHs7GQdc0_CQvfJcZBonyGhAulCaIPlBLMnv8PXIt0bJIWPtSEnGci92JU8Mm2kN9QnluNyDTS0npPYwr3Cl3ryxOBI7RPdKbuFDRH2PkAo9-Ogdiqiep2ESKpwanKREifJo5vXJjvT2BHMrbfIXEbw12_yFY2Ry24VlWwplTsp0HaIxxBrc1AFDTscd-Q"/>
+</div>
+<div class="absolute -bottom-10 -left-10 bg-secondary p-8 max-w-xs shadow-xl -rotate-3 border border-primary/20">
+<p class="font-headline italic text-on-secondary text-lg mb-4">"The Digital Archivist brings the discretion and trust of a private auction house to the modern era."</p>
+<span class="font-label text-[10px] tracking-[0.2em] uppercase text-on-secondary/80">Julien Vasseur • Senior Curator</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#442a22] dark:bg-stone-950 text-[#fbfbe2] dark:text-stone-400 font-sans text-xs tracking-widest uppercase full-width bottom-0 tonal-shift-from-surface flat no shadows w-full py-20 px-12 grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="flex flex-col">
+<span class="text-lg font-serif text-[#fbfbe2] mb-4 font-['Noto_Serif']">The Digital Archivist</span>
+<p class="normal-case tracking-normal font-body text-sm text-[#fbfbe2]/60 mb-6 max-w-xs">Connecting discerning collectors with the world's most significant historical artifacts since 1924.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined hover:text-[#775a19] transition-colors cursor-pointer">social_leaderboard</span>
+<span class="material-symbols-outlined hover:text-[#775a19] transition-colors cursor-pointer">camera</span>
+<span class="material-symbols-outlined hover:text-[#775a19] transition-colors cursor-pointer">mail</span>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="text-[#775a19] font-bold mb-2">Marketplace</h5>
+<a class="text-stone-400 hover:text-[#fbfbe2] hover:underline decoration-[#775a19] transition-opacity duration-200" href="#">Provenance Guide</a>
+<a class="text-stone-400 hover:text-[#fbfbe2] hover:underline decoration-[#775a19] transition-opacity duration-200" href="#">Escrow Services</a>
+<a class="text-stone-400 hover:text-[#fbfbe2] hover:underline decoration-[#775a19] transition-opacity duration-200" href="#">Auction Terms</a>
+<a class="text-stone-400 hover:text-[#fbfbe2] hover:underline decoration-[#775a19] transition-opacity duration-200" href="#">Contact Curator</a>
+</div>
+<div class="flex flex-col gap-6">
+<h5 class="text-[#775a19] font-bold">Authentication Partner</h5>
+<div class="flex items-center gap-4 border border-[#fbfbe2]/10 p-4 bg-stone-900/40">
+<span class="material-symbols-outlined text-4xl text-secondary">verified_user</span>
+<div>
+<span class="block text-[10px] opacity-60 mb-1">GLOBAL STANDARD</span>
+<span class="block font-headline italic tracking-normal text-sm">International Society of Appraisers</span>
+</div>
+</div>
+<p class="text-[9px] text-stone-500 leading-loose">© 2024 Antique Marketplace. The Digital Archivist™ All Rights Reserved. Private Equity Controlled License #442-881.</p>
+</div>
+</footer>
+<!-- Mobile Bottom Navigation (Visible on mobile only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[#fbfbe2] border-t border-outline-variant/10 flex justify-around items-center py-4 px-2 z-50 shadow-[0_-10px_20px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center gap-1 text-[#775a19]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[9px] font-label font-bold tracking-widest uppercase">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span class="text-[9px] font-label tracking-widest uppercase">Browse</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="text-[9px] font-label tracking-widest uppercase">Sellers</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-[9px] font-label tracking-widest uppercase">Archive</span>
+</a>
+</nav>
+</body></html>
