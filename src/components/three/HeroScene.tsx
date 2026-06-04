@@ -7,8 +7,8 @@ import * as THREE from 'three'
 
 // Premium Brand Integrated Color Palette
 const colors = {
-  teal: "#023429ff",        // Deep imperial jade teal
-  gold: "#d8b02dff",        // Rich Venetian Gold
+  teal: "#023429",        // Deep imperial jade teal
+  gold: "#d8b02d",        // Rich Venetian Gold
   brightGold: "#ffd700",  // Brilliant high-light gold
   darkGold: "#a87e22"     // Antique gold bronze
 }
@@ -66,10 +66,10 @@ function BeadRing({ radius, y, count, beadSize = 0.08, material }: BeadRingProps
 // Custom-fitted Wireframe Lathe Cage wrapping only the lower portion of the bulbous body
 function GoldenCage({ material }: { material?: React.ReactNode }) {
   const rings = useMemo(() => [
-    { y: 0.8, r: 0.58 },
-    { y: 2.2, r: 1.72 },
-    { y: 3.6, r: 3.02 },
-    { y: 5.0, r: 3.66 }
+    { y: 0.8, r: 0.49 },
+    { y: 2.2, r: 1.58 },
+    { y: 3.6, r: 2.82 },
+    { y: 5.0, r: 3.46 }
   ], [])
   const numColumns = 16
 
@@ -207,6 +207,7 @@ interface AntiqueVaseProps {
 function AntiqueVase({ scale }: AntiqueVaseProps) {
   const meshRef = useRef<THREE.Group>(null)
   const goldDetailMatRef = useRef<THREE.MeshPhysicalMaterial>(null)
+  const bodyMatRef = useRef<THREE.MeshPhysicalMaterial>(null)
 
   // Custom Vase Profile: High-Detail Architectural Curvature
   // Formed of a narrow foot, flared lip, and round-diamond body shape.
@@ -259,6 +260,11 @@ function AntiqueVase({ scale }: AntiqueVaseProps) {
       // Pulse gold details glow
       goldDetailMatRef.current.emissiveIntensity = 0.35 + Math.sin(time * 1.5) * 0.25
     }
+    if (bodyMatRef.current) {
+      const time = state.clock.getElapsedTime()
+      // Subtle organic breathing glow for the jade body
+      bodyMatRef.current.emissiveIntensity = 0.35 + Math.sin(time * 0.8) * 0.15
+    }
   })
 
   // Shared 24K Venetian Gold Material with emissive pulsing support
@@ -283,6 +289,7 @@ function AntiqueVase({ scale }: AntiqueVaseProps) {
         <mesh castShadow receiveShadow>
           <latheGeometry args={[points, 128]} />
           <meshPhysicalMaterial
+            ref={bodyMatRef}
             color={colors.teal}
             metalness={0.15}
             roughness={0.05}
@@ -298,6 +305,8 @@ function AntiqueVase({ scale }: AntiqueVaseProps) {
             specularIntensity={1.0}
             specularColor="#9b8585"
             side={THREE.DoubleSide}
+            emissive="#005040"
+            emissiveIntensity={0.3}
           />
         </mesh>
 
@@ -340,13 +349,13 @@ function AntiqueVase({ scale }: AntiqueVaseProps) {
         <BeadRing radius={0.75} y={0.3} count={20} beadSize={0.08} material={goldMaterial} />
 
         {/* Architectural Body Band (Pillars pattern at the waist of the diamond body) */}
-        <ColumnMotif radius={3.55} y={5.0} count={36} height={0.8} material={goldMaterial} />
+        <ColumnMotif radius={3.46} y={5.0} count={36} height={0.8} material={goldMaterial} />
         <mesh position={[0, 4.9, 0]} rotation={[Math.PI / 2, 0, 0]} castShadow receiveShadow>
-          <torusGeometry args={[3.52, 0.08, 16, 64]} />
+          <torusGeometry args={[3.46, 0.08, 16, 64]} />
           {goldMaterial}
         </mesh>
         <mesh position={[0, 5.9, 0]} rotation={[Math.PI / 2, 0, 0]} castShadow receiveShadow>
-          <torusGeometry args={[3.18, 0.08, 16, 64]} />
+          <torusGeometry args={[3.12, 0.08, 16, 64]} />
           {goldMaterial}
         </mesh>
 

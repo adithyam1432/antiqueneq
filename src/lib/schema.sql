@@ -15,6 +15,8 @@ CREATE TABLE IF NOT EXISTS users (
   permanent_address TEXT,
   role ENUM('BUYER', 'ADMIN') DEFAULT 'BUYER',
   status ENUM('PENDING', 'APPROVED', 'REJECTED') DEFAULT 'APPROVED',
+  reset_otp VARCHAR(6) NULL,
+  reset_otp_expiry TIMESTAMP NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

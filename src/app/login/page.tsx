@@ -94,7 +94,10 @@ export default function LoginPage() {
 
           <div className={styles.footer}>
             {!isAdmin ? (
-              <p>Don't have an account? <a href={redirectUrl ? `/register?redirect=${encodeURIComponent(redirectUrl)}` : "/register"}>Create one</a></p>
+              <>
+                <p>Don't have an account? <a href={redirectUrl ? `/register?redirect=${encodeURIComponent(redirectUrl)}` : "/register"}>Create one</a></p>
+                <p><a href="/forgot-password" className={styles.forgot}>Forgot Password?</a></p>
+              </>
             ) : (
               <>
                 <p>Curator or Buyer? <a href="/login">Standard Sign In</a></p>
