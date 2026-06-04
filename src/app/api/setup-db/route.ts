@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
     connection = await getServerConnection()
     
     // 1. Create the database if it doesn't exist
-    const dbName = process.env.MYSQL_DATABASE || 'antiquity_db'
+    const dbName = process.env.MYSQL_DATABASE || 'antiques_db'
     await connection.query(`CREATE DATABASE IF NOT EXISTS ${dbName}`)
     console.log(`[Setup] Database ${dbName} confirmed.`)
     

@@ -14,12 +14,13 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Antiquity | Antique Marketplace",
-  description: "India's most antique marketplace. Verified artifacts.Buy and sell antiques.",
+  title: "Anique | Elite Antique Marketplace",
+  description: "India's premier antique marketplace. Verified artifacts. Buy and sell antiques.",
 };
 
 import { ThemeProvider } from "next-themes";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import NextAuthProvider from "@/components/providers/NextAuthProvider";
 
 export default function RootLayout({
@@ -33,8 +34,11 @@ export default function RootLayout({
         <ThemeProvider attribute="data-theme" defaultTheme="dark">
           <NextAuthProvider>
             <CartProvider>
-              <Navbar />
-              {children}
+              <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+                <Navbar />
+                <main style={{ flex: 1 }}>{children}</main>
+                <Footer />
+              </div>
             </CartProvider>
           </NextAuthProvider>
         </ThemeProvider>

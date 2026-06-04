@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     }
 
     const name = buyerName || session.user.name || 'Anonymous Buyer'
-    const email = buyerEmail || session.user.email || 'buyer@antiquity.com'
+    const email = buyerEmail || session.user.email || 'buyer@antiques.com'
     const address = shippingAddress || 'Default Shipping Address'
 
     // Process receipt image if base64 provided
@@ -71,7 +71,6 @@ export async function POST(req: Request) {
 
         const antique = antiques[0]
         const orderId = `ord-${crypto.randomUUID()}`
-        const payoutId = `pay-${crypto.randomUUID()}`
         
         const price = parseFloat(antique.price)
         const commissionRate = parseFloat(antique.commission_rate) || 10
@@ -79,7 +78,6 @@ export async function POST(req: Request) {
 
         const commissionEarned = price * (commissionRate / 100)
         const totalAmount = price + deliveryCharge
-        const sellerPayoutAmount = price - commissionEarned
 
         // 2. Mark item as SOLD (so it doesn't display in list during verification)
         await connection.query(
@@ -100,12 +98,6 @@ export async function POST(req: Request) {
           address, totalAmount, commissionEarned, deliveryCharge,
           paymentMethod || 'credit_card', transactionId || null, receiptUrl, 'PENDING'
         ])
-
-        // 4. Create Payout for Seller
-        await connection.query(`
-          INSERT INTO payouts (id, order_id, seller_id, amount, status)
-          VALUES (?, ?, ?, ?, 'PROCESSING')
-        `, [payoutId, orderId, antique.seller_id, sellerPayoutAmount])
 
         orderIds.push(orderId)
       }

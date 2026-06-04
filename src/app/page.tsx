@@ -12,14 +12,24 @@ import {
 } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import styles from './page.module.css'
 
 export default function Home() {
+  const { data: session } = useSession()
   const { addToCart } = useCart()
   const router = useRouter()
   const [products, setProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('All Artifacts')
+
+  const baseCategories = ['Ceramics', 'Metalware', 'Furniture', 'Horology', 'Paintings']
+  const dynamicCategories = Array.isArray(products)
+    ? Array.from(new Set([
+        ...baseCategories,
+        ...products.map((p: any) => p.category).filter(Boolean)
+      ]))
+    : baseCategories
 
   useEffect(() => {
     fetchProducts()
@@ -43,7 +53,11 @@ export default function Home() {
 
   const handleBuyNow = (product: any) => {
     addToCart(product)
-    router.push('/cart')
+    if (!session) {
+      router.push('/register?redirect=/checkout')
+    } else {
+      router.push('/checkout')
+    }
   }
 
   const filteredProducts = Array.isArray(products)
@@ -77,7 +91,7 @@ export default function Home() {
 
       {/* Category Ribbon */}
       <div className={styles.categoryRibbon}>
-        {['All Artifacts', 'Ceramics', 'Metalware', 'Furniture', 'Horology', 'Paintings'].map(cat => (
+        {['All Artifacts', ...dynamicCategories].map(cat => (
           <button
             key={cat}
             className={`${styles.categoryBtn} ${filter === cat ? styles.active : ''}`}
@@ -147,23 +161,6 @@ export default function Home() {
             ))}
           </div>
         )}
-      </section>
-
-      <section className={styles.trustBanner}>
-        <div className={styles.trustItem}>
-          <ShieldCheck size={32} color="var(--gold)" />
-          <div>
-            <h4>Dual-Layer Verification</h4>
-            <p>Physical inspection by specialized curators before shipment.</p>
-          </div>
-        </div>
-        <div className={styles.trustItem}>
-          <History size={32} color="var(--gold)" />
-          <div>
-            <h4>Full Order Tracking</h4>
-            <p>Live GPS tracking and white-glove delivery for every treasure.</p>
-          </div>
-        </div>
       </section>
     </main>
   )

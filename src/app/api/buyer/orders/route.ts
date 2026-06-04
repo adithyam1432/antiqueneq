@@ -31,11 +31,10 @@ export async function GET(req: Request) {
         a.title as productTitle,
         a.image_url as productImageUrl,
         a.price as productPrice,
-        sp.business_name as sellerBusinessName
+        u.name as sellerBusinessName
       FROM orders o
       JOIN antiques a ON o.product_id = a.id
       JOIN users u ON a.seller_id = u.id
-      LEFT JOIN seller_profiles sp ON u.id = sp.user_id
       WHERE o.buyer_id = ?
       ORDER BY o.created_at DESC
     `, [buyerId])

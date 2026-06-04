@@ -28,6 +28,11 @@
 
   --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
   --font-heading: 'Playfair Display', serif;
+
+  /* Button specific variables */
+  --btn-premium-bg: var(--gold);
+  --btn-premium-text: #060807;
+  --btn-premium-hover: var(--gold-light);
 }
 
 [data-theme='light'] {
@@ -53,6 +58,11 @@
   --text-muted: #5d6764;
   /* Sophisticated warm gray-teal */
   --card-bg: rgba(244, 240, 231, 0.9);
+
+  /* Button specific variables */
+  --btn-premium-bg: var(--gold-dark);
+  --btn-premium-text: #ffffff;
+  --btn-premium-hover: var(--gold);
 }
 
 * {
@@ -105,8 +115,8 @@ h6 {
 
 .button-premium {
   padding: 12px 24px;
-  background: var(--gold-dark);
-  color: var(--ebony);
+  background: var(--btn-premium-bg);
+  color: var(--btn-premium-text);
   border: none;
   font-family: var(--font-heading);
   font-weight: 600;
@@ -118,8 +128,8 @@ h6 {
 }
 
 .button-premium:hover {
-  background: var(--gold-light);
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  background: var(--btn-premium-hover);
+  box-shadow: 0 0 20px var(--gold-glow);
   transform: translateY(-2px);
 }
 
@@ -139,7 +149,7 @@ h6 {
 
 .button-outline:hover {
   background: var(--gold);
-  color: #0a0a0a;
+  color: var(--background);
 }
 
 ::-webkit-scrollbar {
@@ -157,4 +167,138 @@ h6 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gold);
+}
+
+/* Fix Tailwind/custom spacing and size utility classes */
+.p-40 {
+  padding: 40px !important;
+}
+.p-30 {
+  padding: 30px !important;
+}
+.p-20 {
+  padding: 20px !important;
+}
+.p-10 {
+  padding: 10px !important;
+}
+.mb-40 {
+  margin-bottom: 40px !important;
+}
+.mb-30 {
+  margin-bottom: 30px !important;
+}
+.mb-25 {
+  margin-bottom: 25px !important;
+}
+.mb-20 {
+  margin-bottom: 20px !important;
+}
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+.mt-15 {
+  margin-top: 15px !important;
+}
+.gap-30 {
+  gap: 30px !important;
+}
+.gap-24 {
+  gap: 24px !important;
+}
+.gap-20 {
+  gap: 20px !important;
+}
+.gap-16 {
+  gap: 16px !important;
+}
+.gap-10 {
+  gap: 10px !important;
+}
+.gap-8 {
+  gap: 8px !important;
+}
+
+/* Typography utilities */
+.text-32 {
+  font-size: 32px !important;
+}
+.text-24 {
+  font-size: 24px !important;
+}
+.text-20 {
+  font-size: 20px !important;
+}
+.text-18 {
+  font-size: 18px !important;
+}
+.text-14 {
+  font-size: 14px !important;
+}
+.text-13 {
+  font-size: 13px !important;
+}
+.text-12 {
+  font-size: 12px !important;
+}
+
+/* Responsive grid and flex helpers */
+@media (min-width: 768px) {
+  .md-flex-row {
+    flex-direction: row !important;
+  }
+  .md-items-center {
+    align-items: center !important;
+  }
+  .md-items-end {
+    align-items: flex-end !important;
+  }
+}
+
+/* Mobile responsive fixes for the above utilities */
+@media (max-width: 768px) {
+  .p-40 {
+    padding: 20px !important;
+  }
+  .p-30 {
+    padding: 16px !important;
+  }
+  .p-20 {
+    padding: 12px !important;
+  }
+  .mb-30 {
+    margin-bottom: 20px !important;
+  }
+  .mb-20 {
+    margin-bottom: 15px !important;
+  }
+  .mb-25 {
+    margin-bottom: 15px !important;
+  }
+  .gap-30 {
+    gap: 16px !important;
+  }
+  .gap-24 {
+    gap: 12px !important;
+  }
+  .gap-20 {
+    gap: 12px !important;
+  }
+  .gap-16 {
+    gap: 10px !important;
+  }
+  
+  /* Text adjustments for small screens */
+  .text-32 {
+    font-size: 24px !important;
+  }
+  .text-24 {
+    font-size: 20px !important;
+  }
+  .text-20 {
+    font-size: 18px !important;
+  }
+  .text-18 {
+    font-size: 16px !important;
+  }
 }

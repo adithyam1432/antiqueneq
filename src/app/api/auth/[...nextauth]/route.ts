@@ -21,7 +21,7 @@ export const authOptions = {
 
         try {
           const [rows]: any = await pool.query(
-            "SELECT id, name, email, password, role, status FROM users WHERE email = ?",
+            "SELECT id, name, email, password, role, status, contact_number, permanent_address FROM users WHERE email = ?",
             [email]
           )
 
@@ -57,6 +57,7 @@ export const authOptions = {
             email: user.email,
             role: user.role,
             contact_number: user.contact_number,
+            permanent_address: user.permanent_address,
           }
         } catch (error: any) {
           // Surface user-visible errors (like deactivated), suppress system errors
@@ -73,6 +74,7 @@ export const authOptions = {
         token.role = user.role
         token.id = user.id
         token.contact_number = user.contact_number
+        token.permanent_address = user.permanent_address
       }
       return token
     },
@@ -81,6 +83,7 @@ export const authOptions = {
         (session.user as any).role = token.role;
         (session.user as any).id = token.id;
         (session.user as any).contact_number = token.contact_number;
+        (session.user as any).permanent_address = token.permanent_address;
       }
       return session
     }

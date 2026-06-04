@@ -31,7 +31,15 @@ export default function CartPage() {
           {cart.map((item) => (
             <div key={item.id} className={`${styles.cartItem} glass-card`}>
               <div className={styles.itemImage}>
-                <span className={styles.categoryTag}>{item.category}</span>
+                {item.image_url ? (
+                  <img 
+                    src={item.image_url} 
+                    alt={item.title} 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} 
+                  />
+                ) : (
+                  <span className={styles.categoryTag}>{item.category}</span>
+                )}
               </div>
               <div className={styles.itemInfo}>
                 <div className={styles.header}>

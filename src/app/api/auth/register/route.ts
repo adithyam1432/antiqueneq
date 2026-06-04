@@ -6,13 +6,13 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const { 
-      name, email, password, role = 'BUYER',
-      contact_number, business_name, pan_number, business_address, tax_id 
+      name, email, password, contact_number, permanent_address
     } = body
+    const role = 'BUYER'
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !contact_number || !permanent_address) {
       return NextResponse.json(
-        { error: 'Name, email, and password are required' },
+        { error: 'Name, email, password, contact number, and permanent address are required' },
         { status: 400 }
       )
     }
@@ -36,22 +36,13 @@ export async function POST(req: NextRequest) {
     const hashedPassword = await bcrypt.hash(password, 12)
     const userId = crypto.randomUUID()
 
-    // Determine initial status based on role
-    const initialStatus = role === 'SELLER' ? 'PENDING' : 'APPROVED'
+    const initialStatus = 'APPROVED'
 
     // Insert user
     await pool.query(
-      'INSERT INTO users (id, name, email, password, contact_number, role, status) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [userId, name, sanitizedEmail, hashedPassword, contact_number || null, role, initialStatus]
+      'INSERT INTO users (id, name, email, password, contact_number, permanent_address, role, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      [userId, name, sanitizedEmail, hashedPassword, contact_number, permanent_address, role, initialStatus]
     )
-
-    // If role is SELLER, create a pending seller profile
-    if (role === 'SELLER') {
-      await pool.query(
-        'INSERT INTO seller_profiles (user_id, business_name, pan_number, business_address, tax_id, status) VALUES (?, ?, ?, ?, ?, ?)',
-        [userId, business_name, pan_number, business_address, tax_id, 'PENDING']
-      )
-    }
 
     return NextResponse.json(
       { success: true, message: 'Account created successfully' },

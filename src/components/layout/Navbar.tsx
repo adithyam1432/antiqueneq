@@ -3,7 +3,6 @@
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter, usePathname } from 'next/navigation'
 import { 
-  History, 
   Search, 
   ShoppingBag, 
   User, 
@@ -24,7 +23,7 @@ export default function Navbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  if (pathname?.startsWith('/admin/dashboard') || pathname?.startsWith('/seller/dashboard')) {
+  if (pathname?.startsWith('/admin/dashboard')) {
     return null;
   }
 
@@ -36,7 +35,6 @@ export default function Navbar() {
     if (!session?.user) return '/login'
     const role = (session.user as any).role
     if (role === 'ADMIN') return '/admin/dashboard'
-    if (role === 'SELLER') return '/seller/dashboard'
     return '/profile'
   }
 
@@ -45,14 +43,10 @@ export default function Navbar() {
       <div className={styles.container}>
         {/* Logo */}
         <div className={styles.logo} onClick={() => router.push('/')}>
-          <History className={styles.logoIcon} />
-          <span>Antiquity</span>
-        </div>
-
-        {/* Search */}
-        <div className={styles.searchBar}>
-          <Search size={18} className={styles.searchIcon} />
-          <input type="text" placeholder="Search rare artifacts..." />
+          <div className={styles.logoContainer}>
+            <img src="/anique_logo.png" alt="Anique Logo" className={styles.logoImg} />
+          </div>
+          <span className={styles.logoText}>Anique</span>
         </div>
 
         {/* Desktop Actions */}
@@ -95,10 +89,6 @@ export default function Navbar() {
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
         <div className={styles.mobileMenu}>
-          <div className={styles.mobileSearch}>
-            <Search size={18} />
-            <input type="text" placeholder="Search..." />
-          </div>
           <Link href="/" onClick={() => setIsMenuOpen(false)}>Explore</Link>
           <Link href="/cart" onClick={() => setIsMenuOpen(false)}>Cart ({cartCount})</Link>
           {status === 'authenticated' ? (

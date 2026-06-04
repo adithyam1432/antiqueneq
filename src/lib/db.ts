@@ -5,7 +5,7 @@ const dbConfig = {
   host: process.env.MYSQL_HOST || '127.0.0.1',
   user: process.env.MYSQL_USER || 'root',
   password: process.env.MYSQL_PASSWORD || 'root', // Defaulting to 'root' as per common failure
-  database: process.env.MYSQL_DATABASE || 'antiquity_db',
+  database: process.env.MYSQL_DATABASE || 'antiques_db',
 }
 
 // Pool with specific database connection

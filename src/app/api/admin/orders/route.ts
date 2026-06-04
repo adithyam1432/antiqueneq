@@ -30,11 +30,10 @@ export async function GET(req: Request) {
         o.product_id as productId,
         a.title as productTitle,
         a.image_url as productImageUrl,
-        sp.business_name as sellerBusinessName
+        u.name as sellerBusinessName
       FROM orders o
       JOIN antiques a ON o.product_id = a.id
       JOIN users u ON a.seller_id = u.id
-      LEFT JOIN seller_profiles sp ON u.id = sp.user_id
       ORDER BY o.created_at DESC
     `)
 
@@ -98,19 +97,7 @@ export async function PUT(req: Request) {
           "UPDATE antiques SET status = 'APPROVED' WHERE id = ?",
           [order.product_id]
         )
-        // Clean up payout
-        await connection.query(
-          "DELETE FROM payouts WHERE order_id = ?",
-          [orderId]
-        )
-      }
-
-      // 3. Complete payout if DELIVERED
-      if (status === 'DELIVERED') {
-        await connection.query(
-          "UPDATE payouts SET status = 'COMPLETED' WHERE order_id = ?",
-          [orderId]
-        )
+        // Clean up payout (none needed)
       }
 
       await connection.commit()

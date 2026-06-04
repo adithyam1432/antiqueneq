@@ -1,4 +1,4 @@
-export type UserRole = 'BUYER' | 'SELLER' | 'ADMIN';
+export type UserRole = 'BUYER' | 'ADMIN';
 export type VerificationStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
 
 export interface User {
@@ -7,6 +7,8 @@ export interface User {
   email: string;
   role: UserRole;
   status: VerificationStatus;
+  contact_number?: string;
+  permanent_address?: string;
 }
 
 export interface AntiqueProduct {
@@ -17,18 +19,11 @@ export interface AntiqueProduct {
   price: number;
   category: string;
   images: string[];
+  image_url?: string;
   status: VerificationStatus;
   commissionRate: number;
   deliveryCharge: number;
   createdAt: Date;
-}
-
-export interface SellerProfile {
-  userId: string;
-  businessName: string;
-  panNumber: string;
-  documentUrl: string;
-  status: VerificationStatus;
 }
 
 export interface Order {
@@ -41,3 +36,4 @@ export interface Order {
   status: 'PENDING' | 'SHIPPED' | 'DELIVERED' | 'RETURN_REQUESTED' | 'RETURNED';
   createdAt: Date;
 }
+

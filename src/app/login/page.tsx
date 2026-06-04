@@ -1,34 +1,55 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
-import { ShieldCheck, User, Building, Lock, Mail, ArrowRight } from 'lucide-react'
+import { ShieldCheck, Lock, Mail, ArrowRight, ArrowLeft } from 'lucide-react'
 import styles from './login.module.css'
 
 export default function LoginPage() {
-  const [role, setRole] = useState<'BUYER' | 'SELLER' | 'ADMIN'>('BUYER')
+  const [isAdmin, setIsAdmin] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [redirectUrl, setRedirectUrl] = useState('')
   const router = useRouter()
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      setIsAdmin(params.get('admin') === 'true')
+      setRedirectUrl(params.get('redirect') || '')
+    }
+  }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
+    setLoading(true)
     
-    const res = await signIn('credentials', {
-      redirect: false,
-      email,
-      password,
-    })
+    try {
+      const res = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      })
 
-    if (res?.error) {
-      setError(res.error)
-    } else {
-      if (role === 'ADMIN') router.push('/admin/dashboard')
-      else if (role === 'SELLER') router.push('/seller/dashboard')
-      else router.push('/')
+      if (res?.error) {
+        setError(res.error)
+      } else {
+        const sessionRes = await fetch('/api/auth/session')
+        const session = await sessionRes.json()
+        if (session?.user?.role === 'ADMIN') {
+          router.push('/admin/dashboard')
+        } else {
+          router.push(redirectUrl || '/')
+        }
+      }
+    } catch (err) {
+      setError('An unexpected authentication error occurred.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -37,50 +58,51 @@ export default function LoginPage() {
       <main className={styles.loginCard}>
         <div className="glass-card">
           <div className={styles.cardHeader}>
-            <ShieldCheck size={48} color="var(--gold)" className="mx-auto mb-10" />
-            <h1 className="gold-gradient">Secure Access</h1>
-            <p>Welcome back to India's elite antique network.</p>
-          </div>
-
-          <div className={styles.roleSelector}>
-            <button 
-              className={`${styles.roleBtn} ${role === 'BUYER' ? styles.activeRole : ''}`}
-              onClick={() => setRole('BUYER')}
-            >
-              <User size={18} /> Buyer
-            </button>
-            <button 
-              className={`${styles.roleBtn} ${role === 'SELLER' ? styles.activeRole : ''}`}
-              onClick={() => setRole('SELLER')}
-            >
-              <Building size={18} /> Seller
-            </button>
-            <button 
-              className={`${styles.roleBtn} ${role === 'ADMIN' ? styles.activeRole : ''}`}
-              onClick={() => setRole('ADMIN')}
-            >
-              <ShieldCheck size={18} /> Admin
-            </button>
+            <ShieldCheck size={40} color="var(--gold)" className="mx-auto mb-6" />
+            <h1 className="gold-gradient">{isAdmin ? 'Admin Portal' : 'Secure Access'}</h1>
+            <p>{isAdmin ? 'Anique Administrator Access Portal' : 'Welcome back to India\'s elite antique network.'}</p>
           </div>
 
           <form className={styles.form} onSubmit={handleLogin}>
-            {error && <p className="text-red-500 text-center mb-10">{error}</p>}
+            {error && <p className="text-red-500 text-center mb-6 text-13">{error}</p>}
             <div className={styles.inputGroup}>
               <Mail size={18} className={styles.inputIcon} />
-              <input type="email" placeholder="Email Address" required value={email} onChange={e => setEmail(e.target.value)} />
+              <input 
+                type="email" 
+                placeholder="Email Address" 
+                required 
+                value={email} 
+                onChange={e => setEmail(e.target.value)} 
+                disabled={loading}
+              />
             </div>
             <div className={styles.inputGroup}>
               <Lock size={18} className={styles.inputIcon} />
-              <input type="password" placeholder="Password" required value={password} onChange={e => setPassword(e.target.value)} />
+              <input 
+                type="password" 
+                placeholder="Password" 
+                required 
+                value={password} 
+                onChange={e => setPassword(e.target.value)} 
+                disabled={loading}
+              />
             </div>
-            <button type="submit" className="button-premium w-full">
-              Sign In <ArrowRight size={18} style={{ marginLeft: '8px' }} />
+            <button type="submit" className="button-premium w-full" disabled={loading}>
+              {loading ? 'Verifying...' : 'Sign In'} <ArrowRight size={18} style={{ marginLeft: '8px' }} />
             </button>
           </form>
 
           <div className={styles.footer}>
-            <p>Don't have an account? <a href="/register">Create one</a></p>
-            <a href="#" className={styles.forgot}>Forgot password?</a>
+            {!isAdmin ? (
+              <p>Don't have an account? <a href={redirectUrl ? `/register?redirect=${encodeURIComponent(redirectUrl)}` : "/register"}>Create one</a></p>
+            ) : (
+              <>
+                <p>Curator or Buyer? <a href="/login">Standard Sign In</a></p>
+                <a href="/" className={styles.forgot} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                  <ArrowLeft size={12} /> Return Home
+                </a>
+              </>
+            )}
           </div>
         </div>
       </main>

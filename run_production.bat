@@ -1,6 +1,6 @@
 @echo off
 echo =========================================
-echo Antiquity Marketplace - Production Mode
+echo Antiques Marketplace - Production Mode
 echo =========================================
 echo.
 echo Step 1: Building the application...
