@@ -26,7 +26,7 @@ export default function Footer() {
             <div className={styles.logoContainer}>
               <img src="/anique_logo.png" alt="Anique Logo" className={styles.logoImg} />
             </div>
-            <span className={styles.logoText}>Anique</span>
+            <span className={styles.logoText}>AntiQues</span>
           </Link>
           <p className={styles.description}>
             India's most trusted premium antique marketplace. Curated by experts, verified for authenticity, and delivered through a secure double-layered escrow network.
@@ -59,7 +59,7 @@ export default function Footer() {
       {/* Bottom Row */}
       <div className={styles.bottomRow}>
         <div className={styles.copyright}>
-          © {new Date().getFullYear()} Anique Marketplace. All rights reserved.
+          © {new Date().getFullYear()} AntiQues Marketplace. All rights reserved.
         </div>
         <div className={styles.socials}>
           <Link href="/privacy" className={styles.socialLink}>Privacy Shield</Link>

@@ -59,7 +59,9 @@ export default function AdminDashboard() {
     price: '',
     category: 'Ceramics',
     image_url: '',
-    status: 'APPROVED'
+    status: 'APPROVED',
+    year_created: 'Circa 1850',
+    stock: '1'
   })
 
   const createFileInputRef = useRef<HTMLInputElement>(null)
@@ -231,7 +233,9 @@ export default function AdminDashboard() {
       price: '',
       category: 'Ceramics',
       image_url: '',
-      status: 'APPROVED'
+      status: 'APPROVED',
+      year_created: 'Circa 1850',
+      stock: '1'
     })
     setIsCreateModalOpen(true)
   }
@@ -245,7 +249,9 @@ export default function AdminDashboard() {
       price: item.price.toString(),
       category: item.category || 'Ceramics',
       image_url: item.image_url || '',
-      status: item.status || 'APPROVED'
+      status: item.status || 'APPROVED',
+      year_created: item.year_created || 'Circa 1850',
+      stock: (item.stock || 1).toString()
     })
     setIsEditModalOpen(true)
   }
@@ -276,7 +282,7 @@ export default function AdminDashboard() {
   }
 
   // Aggregated calculations for Stats
-  const activeOrders = orders.filter(o => o.status !== 'REJECTED')
+  const activeOrders = orders.filter(o => o.status !== 'REJECTED' && o.status !== 'RETURNED')
   const totalSales = activeOrders.reduce((sum, o) => sum + parseFloat(o.totalAmount || 0), 0)
   const totalCommission = activeOrders.reduce((sum, o) => sum + parseFloat(o.commissionEarned || 0), 0)
   const totalLosses = orders.filter(o => o.status === 'REJECTED' || o.status === 'RETURNED').reduce((sum, o) => sum + parseFloat(o.totalAmount || 0), 0)
@@ -311,21 +317,13 @@ export default function AdminDashboard() {
     }))
     .sort((a, b) => a.dateStr.localeCompare(b.dateStr))
 
-  const defaultLinePoints = [
-    { label: 'May 10', value: 85500 },
-    { label: 'May 15', value: 38500 },
-    { label: 'May 20', value: 45500 },
-    { label: 'May 25', value: 12500 },
-    { label: 'May 28', value: 95500 },
-    { label: 'Jun 01', value: 12500 },
-    { label: 'Jun 02', value: 150500 }
-  ]
-  const displayLinePoints = linePoints.length >= 3 ? linePoints : defaultLinePoints
+  const displayLinePoints = linePoints
   const maxLineVal = Math.max(...displayLinePoints.map(p => p.value), 10000)
 
   // Calculate coordinates for line path
   const coords = displayLinePoints.map((p, i) => {
-    const x = 80 + (i / (displayLinePoints.length - 1)) * 390
+    const denom = displayLinePoints.length > 1 ? displayLinePoints.length - 1 : 1
+    const x = displayLinePoints.length === 1 ? 280 : 80 + (i / denom) * 390
     const y = 170 - (p.value / maxLineVal) * 140
     return { x, y, label: p.label, value: p.value }
   })
@@ -370,14 +368,7 @@ export default function AdminDashboard() {
 
   const totalRealCatSales = catSales.reduce((sum, item) => sum + item.sales, 0)
   
-  const defaultCatSales = [
-    { category: 'Ceramics', sales: 98000, commission: 9800 },
-    { category: 'Metalware', sales: 220000, commission: 22000 },
-    { category: 'Furniture', sales: 310500, commission: 31050 },
-    { category: 'Horology', sales: 196000, commission: 19600 },
-    { category: 'Paintings', sales: 95500, commission: 9550 }
-  ]
-  const displayCatSales = totalRealCatSales > 0 ? catSales : defaultCatSales
+  const displayCatSales = catSales
   const maxCatVal = Math.max(...displayCatSales.map(c => c.sales), 10000)
 
   // Chart 3: Category Inventory Split (Donut Chart)
@@ -385,20 +376,14 @@ export default function AdminDashboard() {
     const count = antiques.filter(a => a.category === cat).length
     return { category: cat, count }
   })
-  const defaultCatCounts = [
-    { category: 'Ceramics', count: 5 },
-    { category: 'Metalware', count: 3 },
-    { category: 'Furniture', count: 2 },
-    { category: 'Horology', count: 4 },
-    { category: 'Paintings', count: 4 }
-  ]
-  const displayCatCounts = totalProducts > 0 ? catCounts : defaultCatCounts
+  
+  const displayCatCounts = catCounts
   const totalDisplayCounts = displayCatCounts.reduce((sum, item) => sum + item.count, 0)
 
   const donutColors = ['#dfb743', '#f4e1a6', '#a87e22', '#a27b38', '#cbb26a']
   let currentOffset = 0
   const donutSegments = displayCatCounts.map((item, idx) => {
-    const pct = item.count / totalDisplayCounts
+    const pct = totalDisplayCounts > 0 ? item.count / totalDisplayCounts : 0
     const strokeLength = pct * 377
     const strokeOffset = 377 - currentOffset
     currentOffset += strokeLength
@@ -413,8 +398,8 @@ export default function AdminDashboard() {
   })
 
   // Chart 4: Sales vs Loss comparison chart
-  const displaySalesVal = totalSales > 0 || totalLosses > 0 ? totalSales : 640000
-  const displayLossVal = totalSales > 0 || totalLosses > 0 ? totalLosses : 95500
+  const displaySalesVal = totalSales
+  const displayLossVal = totalLosses
   const maxCompVal = Math.max(displaySalesVal, displayLossVal, 10000)
 
   return (
@@ -547,6 +532,12 @@ export default function AdminDashboard() {
                 <line x1="80" y1="120" x2="480" y2="120" stroke="rgba(255,255,255,0.04)" strokeDasharray="3 3" />
                 <line x1="80" y1="170" x2="480" y2="170" stroke="rgba(255,255,255,0.12)" />
 
+                {coords.length === 0 && (
+                  <text x="280" y="100" fill="var(--text-muted)" fontSize="12" textAnchor="middle" opacity="0.6">
+                    No sales recorded in database.
+                  </text>
+                )}
+
                 {/* Y Axis Grid Labels */}
                 <text x="70" y="24" fill="var(--text-muted)" fontSize="8" textAnchor="end">₹{maxLineVal >= 1000 ? `${Math.round(maxLineVal / 1000)}k` : maxLineVal}</text>
                 <text x="70" y="74" fill="var(--text-muted)" fontSize="8" textAnchor="end">₹{maxLineVal >= 1000 ? `${Math.round(maxLineVal * 0.66 / 1000)}k` : Math.round(maxLineVal * 0.66)}</text>
@@ -638,6 +629,12 @@ export default function AdminDashboard() {
                 <line x1="80" y1="70" x2="480" y2="70" stroke="rgba(255,255,255,0.04)" strokeDasharray="3 3" />
                 <line x1="80" y1="120" x2="480" y2="120" stroke="rgba(255,255,255,0.04)" strokeDasharray="3 3" />
                 <line x1="80" y1="170" x2="480" y2="170" stroke="rgba(255,255,255,0.12)" />
+
+                {totalRealCatSales === 0 && (
+                  <text x="280" y="100" fill="var(--text-muted)" fontSize="12" textAnchor="middle" opacity="0.6">
+                    No category sales recorded.
+                  </text>
+                )}
 
                 {/* Y Axis Grid Labels */}
                 <text x="70" y="24" fill="var(--text-muted)" fontSize="8" textAnchor="end">₹{maxCatVal >= 1000 ? `${Math.round(maxCatVal / 1000)}k` : maxCatVal}</text>
@@ -751,7 +748,7 @@ export default function AdminDashboard() {
                         strokeWidth="15"
                         strokeDasharray={`${seg.strokeLength} 377`}
                         strokeDashoffset={seg.strokeOffset}
-                        strokeLinecap="round"
+                        strokeLinecap="butt"
                         className={styles.chartDonutSegment}
                         onMouseEnter={(e) => handleMouseEnter(e, seg.category, `Count: ${seg.count} artifacts (${Math.round(seg.pct * 100)}%)`)}
                         onMouseLeave={handleMouseLeave}
@@ -835,6 +832,12 @@ export default function AdminDashboard() {
                 <line x1="80" y1="70" x2="480" y2="70" stroke="rgba(255,255,255,0.04)" strokeDasharray="3 3" />
                 <line x1="80" y1="120" x2="480" y2="120" stroke="rgba(255,255,255,0.04)" strokeDasharray="3 3" />
                 <line x1="80" y1="170" x2="480" y2="170" stroke="rgba(255,255,255,0.12)" />
+
+                {displaySalesVal === 0 && displayLossVal === 0 && (
+                  <text x="280" y="100" fill="var(--text-muted)" fontSize="12" textAnchor="middle" opacity="0.6">
+                    No financial data available.
+                  </text>
+                )}
 
                 {/* Y Axis Grid Labels */}
                 <text x="70" y="24" fill="var(--text-muted)" fontSize="8" textAnchor="end">₹{maxCompVal >= 1000 ? `${Math.round(maxCompVal / 1000)}k` : maxCompVal}</text>
@@ -1266,6 +1269,28 @@ export default function AdminDashboard() {
                 </div>
 
                 <div className={styles.formGroup}>
+                  <label>Year of Origin</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. Circa 1850, 18th Century" 
+                    value={formData.year_created} 
+                    onChange={(e) => setFormData({ ...formData, year_created: e.target.value })} 
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Stock Quantity *</label>
+                  <input 
+                    type="number" 
+                    placeholder="e.g. 1" 
+                    value={formData.stock} 
+                    onChange={(e) => setFormData({ ...formData, stock: e.target.value })} 
+                    min="1"
+                    required 
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
                   <label>Description</label>
                   <textarea 
                     placeholder="Provide details about the antique's background, era, materials..." 
@@ -1381,6 +1406,28 @@ export default function AdminDashboard() {
                     type="number" 
                     value={formData.price} 
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })} 
+                    required 
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Year of Origin</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. Circa 1850, 18th Century" 
+                    value={formData.year_created} 
+                    onChange={(e) => setFormData({ ...formData, year_created: e.target.value })} 
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Stock Quantity *</label>
+                  <input 
+                    type="number" 
+                    placeholder="e.g. 1" 
+                    value={formData.stock} 
+                    onChange={(e) => setFormData({ ...formData, stock: e.target.value })} 
+                    min="1"
                     required 
                   />
                 </div>

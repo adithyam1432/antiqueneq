@@ -29,16 +29,31 @@ export default function RegisterPage() {
     e.preventDefault()
     setError('')
     setSuccess('')
+
+    // Validate Password Pattern: At least 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special character
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/
+    if (!passwordRegex.test(password)) {
+      setError('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character (e.g. !@#$%^&*).')
+      return
+    }
+
+    // Validate Contact Number Pattern: 10-digit mobile number, optionally prefixed with +91
+    const contactRegex = /^(\+91[\-\s]?)?[6-9]\d{9}$/
+    if (!contactRegex.test(contactNumber)) {
+      setError('Please enter a valid 10-digit mobile number (e.g., 9876543210 or +919876543210).')
+      return
+    }
+
     setLoading(true)
-    
+
     try {
       const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          name, 
-          email, 
-          password, 
+        body: JSON.stringify({
+          name,
+          email,
+          password,
           role: 'BUYER',
           contact_number: contactNumber,
           permanent_address: permanentAddress
@@ -48,19 +63,22 @@ export default function RegisterPage() {
       const data = await res.json()
 
       if (!res.ok) {
+        if (res.status === 409 || data.error?.toLowerCase().includes('exists')) {
+          throw new Error('Existing account. Login through the credentials or create a new account.')
+        }
         throw new Error(data.error || 'Failed to create account')
       }
 
-      setSuccess('Account created successfully! Redirecting to login...')
-      
+      setSuccess(`Hello ${name}! Welcome to Antique Family! Redirecting to login...`)
+
       // Redirect to login after 2 seconds
       setTimeout(() => {
-        const loginUrl = redirectUrl 
+        const loginUrl = redirectUrl
           ? `/login?redirect=${encodeURIComponent(redirectUrl)}`
           : '/login'
         router.push(loginUrl)
       }, 2000)
-      
+
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message)
@@ -83,9 +101,9 @@ export default function RegisterPage() {
           </div>
 
           <form className={styles.form} onSubmit={handleRegister}>
-            {error && <p className="text-red-500 text-center mb-10">{error}</p>}
-            {success && <p className="text-green-500 text-center mb-10">{success}</p>}
-            
+            {error && <p className="text-red-500 text-center mb-10" style={{ fontSize: '13px', lineHeight: 1.4 }}>{error}</p>}
+            {success && <p className="text-green-500 text-center mb-10" style={{ fontSize: '13px', lineHeight: 1.4 }}>{success}</p>}
+
             <div className={styles.inputGroup}>
               <User size={18} className={styles.inputIcon} />
               <input type="text" placeholder="Full Name" required value={name} onChange={e => setName(e.target.value)} disabled={loading} />
@@ -96,15 +114,23 @@ export default function RegisterPage() {
             </div>
             <div className={styles.inputGroup}>
               <Phone size={18} className={styles.inputIcon} />
-              <input type="text" placeholder="Contact Number" required value={contactNumber} onChange={e => setContactNumber(e.target.value)} disabled={loading} />
+              <input
+                type="text"
+                placeholder="Contact Number (10 digits)"
+                required
+                value={contactNumber}
+                onChange={e => setContactNumber(e.target.value)}
+                disabled={loading}
+                title="Please enter a valid 10-digit mobile number, optionally prefixed with +91"
+              />
             </div>
             <div className={styles.inputGroup} style={{ alignItems: 'flex-start', paddingTop: '10px' }}>
               <MapPin size={18} className={styles.inputIcon} style={{ marginTop: '2px' }} />
-              <textarea 
-                placeholder="Permanent Address" 
-                required 
-                value={permanentAddress} 
-                onChange={e => setPermanentAddress(e.target.value)} 
+              <textarea
+                placeholder="Permanent Address"
+                required
+                value={permanentAddress}
+                onChange={e => setPermanentAddress(e.target.value)}
                 disabled={loading}
                 rows={2}
                 style={{
@@ -123,11 +149,19 @@ export default function RegisterPage() {
             </div>
             <div className={styles.inputGroup}>
               <Lock size={18} className={styles.inputIcon} />
-              <input type="password" placeholder="Password" required value={password} onChange={e => setPassword(e.target.value)} disabled={loading} minLength={6} />
+              <input
+                type="password"
+                placeholder="Enter New Password"
+                required
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                disabled={loading}
+              />
             </div>
-            
-            <button type="submit" className="button-premium w-full" disabled={loading}>
-              {loading ? 'Creating Account...' : 'Register'} <ArrowRight size={18} style={{ marginLeft: '8px' }} />
+
+            <button type="submit" className="button-premium w-full" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', minHeight: '46px' }} disabled={loading}>
+              <span>{loading ? 'Creating Account... welcome antique <family>name</family>' : 'Register'}</span>
+              <ArrowRight size={18} style={{ flexShrink: 0 }} />
             </button>
           </form>
 

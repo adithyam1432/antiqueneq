@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import "./compiled-tailwind.css";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 
@@ -14,7 +15,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Anique | Elite Antique Marketplace",
+  title: "AntiQues | Elite Antique Marketplace",
   description: "India's premier antique marketplace. Verified artifacts. Buy and sell antiques.",
 };
 
@@ -30,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${playfair.variable}`}>
+      <body className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
         <ThemeProvider attribute="data-theme" defaultTheme="dark">
           <NextAuthProvider>
             <CartProvider>

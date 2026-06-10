@@ -54,15 +54,21 @@ export default function CartPage() {
                 <p className={styles.price}>₹{item.price.toLocaleString()}</p>
                 
                 <div className={styles.controls}>
-                  <div className={styles.quantity}>
-                    <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>
-                      <Minus size={16} />
-                    </button>
-                    <span>{item.quantity}</span>
-                    <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>
-                      <Plus size={16} />
-                    </button>
-                  </div>
+                  {item.stock && item.stock > 1 ? (
+                    <div className={styles.quantity}>
+                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>
+                        <Minus size={16} />
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button onClick={() => updateQuantity(item.id, Math.min(item.stock || 1, item.quantity + 1))}>
+                        <Plus size={16} />
+                      </button>
+                    </div>
+                  ) : (
+                    <div style={{ color: 'var(--text-muted)', fontSize: '13px', fontStyle: 'italic', display: 'flex', alignItems: 'center' }}>
+                      Quantity: 1 (Unique Antique)
+                    </div>
+                  )}
                   <p className={styles.subtotal}>
                     ₹{(item.price * item.quantity).toLocaleString()}
                   </p>
@@ -88,8 +94,12 @@ export default function CartPage() {
               <span>₹{cartTotal.toLocaleString()}</span>
             </div>
             
-            <button className="button-premium w-full mt-6" onClick={() => router.push('/checkout')}>
-              Proceed to Checkout <ArrowRight size={18} style={{ marginLeft: '8px' }} />
+            <button 
+              className="button-premium w-full mt-6" 
+              style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} 
+              onClick={() => router.push('/checkout')}
+            >
+              Proceed to Checkout <ArrowRight size={18} style={{ marginLeft: '8px', display: 'inline-block', flexShrink: 0 }} />
             </button>
             <p className={styles.secureText}>
               Every transaction is protected with military-grade encryption.

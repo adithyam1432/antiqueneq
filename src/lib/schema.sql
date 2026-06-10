@@ -28,6 +28,8 @@ CREATE TABLE IF NOT EXISTS antiques (
   description TEXT,
   price DECIMAL(15, 2) NOT NULL,
   category VARCHAR(100),
+  year_created VARCHAR(100) DEFAULT 'Circa 1850',
+  stock INT DEFAULT 1,
   image_url VARCHAR(255), -- Added for simple image hosting
   images JSON, -- Store array of image URLs
   status ENUM('PENDING', 'APPROVED', 'REJECTED', 'SOLD') DEFAULT 'PENDING',

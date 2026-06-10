@@ -71,10 +71,10 @@ export default function ProfilePage() {
         </Link>
 
         {/* Curator Profile Info */}
-        <div className="glass-card p-40 mb-30 flex flex-col md-flex-row justify-between items-start md-items-center gap-20">
+        <div className="glass-card p-40 mb-30" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
           <div>
-            <div className="flex items-center gap-16 mb-10">
-              <div className="w-60 h-60 rounded-full flex items-center justify-center" style={{ background: 'rgba(223, 183, 67, 0.1)', border: '1px solid var(--gold)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '10px' }}>
+              <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(223, 183, 67, 0.1)', border: '1px solid var(--gold)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <User size={30} color="var(--gold)" />
               </div>
               <div>
@@ -83,10 +83,10 @@ export default function ProfilePage() {
               </div>
             </div>
             
-            <div className="flex flex-wrap gap-20 text-muted text-14 mt-15">
-              <span className="flex items-center gap-6"><Mail size={14} color="var(--gold)" /> {session?.user?.email}</span>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginTop: '15px' }} className="text-muted text-14">
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}><Mail size={14} color="var(--gold)" /> {session?.user?.email}</span>
               {(session?.user as any)?.contact_number && (
-                <span className="flex items-center gap-6"><Phone size={14} color="var(--gold)" /> {(session?.user as any).contact_number}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}><Phone size={14} color="var(--gold)" /> {(session?.user as any).contact_number}</span>
               )}
             </div>
           </div>
@@ -118,30 +118,35 @@ export default function ProfilePage() {
           </div>
         ) : (
           <div className="flex flex-col gap-20">
-            {orders.map((order) => (
-              <div key={order.id} className="glass-card p-30 flex flex-col gap-24" style={{ borderLeft: `4px solid ${order.status === 'CONFIRMED' || order.status === 'DELIVERED' || order.status === 'SHIPPED' ? '#2ecc71' : order.status === 'REJECTED' ? '#e74c3c' : '#f1c40f'}` }}>
+             {orders.map((order) => (
+              <div key={order.id} className="glass-card p-30" style={{ display: 'flex', flexDirection: 'column', gap: '24px', borderLeft: `4px solid ${order.status === 'CONFIRMED' || order.status === 'DELIVERED' || order.status === 'SHIPPED' ? '#2ecc71' : order.status === 'REJECTED' ? '#e74c3c' : '#f1c40f'}` }}>
                 
                 {/* Upper Section: Details and Badge Layout */}
-                <div className="flex flex-col md-flex-row justify-between gap-30">
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '30px', alignItems: 'flex-start' }}>
                   
                   {/* Left Info: Image and Description */}
-                  <div className="flex gap-20 flex-1">
+                  <div style={{ display: 'flex', gap: '24px', flex: 1, alignItems: 'flex-start' }}>
                     {order.productImageUrl && (
                       <img 
                         src={order.productImageUrl} 
                         alt={order.productTitle} 
-                        style={{ width: '90px', height: '90px', borderRadius: '8px', objectFit: 'cover', border: '1px solid var(--glass-border)' }}
+                        style={{ width: '90px', height: '90px', borderRadius: '8px', objectFit: 'cover', border: '1px solid var(--glass-border)', flexShrink: 0 }}
                       />
                     )}
-                    <div>
-                      <span style={{ fontSize: '10px', color: 'var(--gold)', fontWeight: 700, letterSpacing: '0.05em' }}>ORDER REFERENCE: {order.id.substring(0, 14).toUpperCase()}...</span>
-                      <h3 className="text-18 font-playfair text-white mt-4 mb-8">{order.productTitle}</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <span style={{ fontSize: '10px', color: 'var(--gold)', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase' }}>ORDER REFERENCE: {order.id.substring(0, 14).toUpperCase()}...</span>
+                      <h3 className="text-18 font-playfair text-white" style={{ margin: '4px 0 8px 0', lineHeight: 1.3 }}>{order.productTitle}</h3>
                       
-                      <div className="flex flex-col gap-4 text-13 text-muted">
-                        <span>Seller Partner: <strong>{order.sellerBusinessName || 'Direct Curator'}</strong></span>
-                        <span>Acquisition Cost: <strong>₹{parseFloat(order.productPrice).toLocaleString()}</strong></span>
-                        <span>Delivery Escrow: <strong>₹{parseFloat(order.deliveryCharge).toLocaleString()}</strong></span>
-                        <span className="text-white font-bold mt-4" style={{ fontSize: '14px' }}>Grand Total: ₹{parseFloat(order.totalAmount).toLocaleString()}</span>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }} className="text-13 text-muted">
+                        <div>Seller Partner: <strong style={{ color: 'var(--foreground)' }}>{order.sellerBusinessName || 'Direct Curator'}</strong></div>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+                          <span>Acquisition Cost: <strong style={{ color: 'var(--foreground)' }}>₹{parseFloat(order.productPrice).toLocaleString()}</strong></span>
+                          <span style={{ color: 'rgba(255,255,255,0.15)' }}>|</span>
+                          <span>Delivery Escrow: <strong style={{ color: 'var(--foreground)' }}>₹{parseFloat(order.deliveryCharge).toLocaleString()}</strong></span>
+                        </div>
+                        <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px dashed rgba(223, 183, 67, 0.2)', width: 'fit-content' }}>
+                          <span className="text-white font-bold" style={{ fontSize: '15px' }}>Grand Total: <span style={{ color: 'var(--gold)' }}>₹{parseFloat(order.totalAmount).toLocaleString()}</span></span>
+                        </div>
                       </div>
                     </div>
                   </div>

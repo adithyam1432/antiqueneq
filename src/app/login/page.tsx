@@ -36,7 +36,11 @@ export default function LoginPage() {
       })
 
       if (res?.error) {
-        setError(res.error)
+        if (res.error === 'CredentialsSignin') {
+          setError('Invalid email or password. Login through your credentials or create a new account.')
+        } else {
+          setError(res.error)
+        }
       } else {
         const sessionRes = await fetch('/api/auth/session')
         const session = await sessionRes.json()
@@ -60,7 +64,7 @@ export default function LoginPage() {
           <div className={styles.cardHeader}>
             <ShieldCheck size={40} color="var(--gold)" className="mx-auto mb-6" />
             <h1 className="gold-gradient">{isAdmin ? 'Admin Portal' : 'Secure Access'}</h1>
-            <p>{isAdmin ? 'Anique Administrator Access Portal' : 'Welcome back to India\'s elite antique network.'}</p>
+            <p>{isAdmin ? 'AntiQues Administrator Access Portal' : 'Welcome back to India\'s elite antique network.'}</p>
           </div>
 
           <form className={styles.form} onSubmit={handleLogin}>
@@ -87,8 +91,9 @@ export default function LoginPage() {
                 disabled={loading}
               />
             </div>
-            <button type="submit" className="button-premium w-full" disabled={loading}>
-              {loading ? 'Verifying...' : 'Sign In'} <ArrowRight size={18} style={{ marginLeft: '8px' }} />
+            <button type="submit" className="button-premium w-full" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', minHeight: '46px' }} disabled={loading}>
+              <span>{loading ? 'Verifying...' : 'Sign In'}</span>
+              <ArrowRight size={18} style={{ flexShrink: 0 }} />
             </button>
           </form>
 

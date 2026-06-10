@@ -130,8 +130,9 @@ export default function ForgotPasswordPage() {
               </div>
 
               <div className={styles.buttonGroup}>
-                <button type="submit" className="button-premium w-full" disabled={loading}>
-                  {loading ? 'Sending Code...' : 'Request Verification Code'} <ArrowRight size={18} style={{ marginLeft: '8px' }} />
+                <button type="submit" className="button-premium w-full" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', minHeight: '46px' }} disabled={loading}>
+                  <span>{loading ? 'Sending Code...' : 'Request Verification Code'}</span>
+                  <ArrowRight size={18} style={{ flexShrink: 0 }} />
                 </button>
               </div>
             </form>
@@ -178,7 +179,7 @@ export default function ForgotPasswordPage() {
               </div>
 
               <div className={styles.buttonGroup}>
-                <button type="submit" className="button-premium w-full" disabled={loading}>
+                <button type="submit" className="button-premium w-full" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minHeight: '46px' }} disabled={loading}>
                   {loading ? 'Resetting Password...' : 'Reset Password'}
                 </button>
                 <button 

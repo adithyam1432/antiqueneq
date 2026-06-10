@@ -44,6 +44,8 @@ export async function GET() {
         a.description, 
         a.price, 
         a.category, 
+        a.year_created,
+        a.stock,
         a.status, 
         a.image_url,
         a.images,
@@ -69,7 +71,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json()
-    const { title, description, price, category, image_url, status } = body
+    const { title, description, price, category, year_created, stock, image_url, status } = body
 
     if (!title || !price || !category) {
       return NextResponse.json({ error: "Missing required fields (title, price, category)" }, { status: 400 })
@@ -83,9 +85,9 @@ export async function POST(request: Request) {
     const finalImageUrl = saveBase64Image(image_url)
 
     await pool.query(
-      `INSERT INTO antiques (id, seller_id, title, description, price, category, image_url, status)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      [newId, sellerId, title, description || '', parseFloat(price) || 0, category, finalImageUrl, finalStatus]
+      `INSERT INTO antiques (id, seller_id, title, description, price, category, year_created, stock, image_url, status)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [newId, sellerId, title, description || '', parseFloat(price) || 0, category, year_created || 'Circa 1850', parseInt(stock) || 1, finalImageUrl, finalStatus]
     )
 
     return NextResponse.json({ success: true, id: newId, message: "Antique created successfully" })
@@ -103,21 +105,21 @@ export async function PUT(request: Request) {
 
   try {
     const body = await request.json()
-    const { id, antiqueId, status, title, description, price, category, image_url } = body
+    const { id, antiqueId, status, title, description, price, category, year_created, stock, image_url } = body
     const targetId = id || antiqueId
 
     if (!targetId) {
       return NextResponse.json({ error: "Missing antique ID" }, { status: 400 })
     }
 
-    if (title !== undefined || description !== undefined || price !== undefined || category !== undefined || image_url !== undefined) {
+    if (title !== undefined || description !== undefined || price !== undefined || category !== undefined || year_created !== undefined || stock !== undefined || image_url !== undefined) {
       const finalImageUrl = image_url !== undefined ? saveBase64Image(image_url) : undefined
 
       await pool.query(
         `UPDATE antiques 
-         SET title = ?, description = ?, price = ?, category = ?, image_url = COALESCE(?, image_url), status = COALESCE(?, status)
+         SET title = ?, description = ?, price = ?, category = ?, year_created = COALESCE(?, year_created), stock = COALESCE(?, stock), image_url = COALESCE(?, image_url), status = COALESCE(?, status)
          WHERE id = ?`,
-        [title || '', description || '', parseFloat(price) || 0, category || '', finalImageUrl !== undefined ? finalImageUrl : null, status || null, targetId]
+        [title || '', description || '', parseFloat(price) || 0, category || '', year_created !== undefined ? year_created : null, stock !== undefined ? parseInt(stock) : null, finalImageUrl !== undefined ? finalImageUrl : null, status || null, targetId]
       )
       return NextResponse.json({ success: true, message: "Antique updated successfully" })
     } else {

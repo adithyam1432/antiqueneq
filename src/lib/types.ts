@@ -20,6 +20,7 @@ export interface AntiqueProduct {
   category: string;
   images: string[];
   image_url?: string;
+  stock?: number;
   status: VerificationStatus;
   commissionRate: number;
   deliveryCharge: number;

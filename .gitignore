@@ -43,3 +43,9 @@ next-env.d.ts
 # build tools and java outputs
 /maven/
 **/target/
+/nbproject/private/
+/nbproject/
+/java-app/src/main/webapp/META-INF/
+/public/receipts/
+/public/uploads/
+

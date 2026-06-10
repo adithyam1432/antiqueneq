@@ -47,7 +47,7 @@ export default function Navbar() {
             <div className={styles.logoContainer}>
               <img src="/anique_logo.png" alt="Anique Logo" className={styles.logoImg} />
             </div>
-            <span className={styles.logoText}>Anique</span>
+            <span className={styles.logoText}>AntiQues</span>
           </div>
 
           {/* Desktop Actions */}
@@ -56,26 +56,27 @@ export default function Navbar() {
             
             <ThemeToggle />
 
-            <button className={styles.cartBtn} onClick={() => router.push('/cart')}>
-              <ShoppingBag size={22} />
+            <button className={styles.cartBtn} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => router.push('/cart')}>
+              <ShoppingBag size={22} style={{ display: 'inline-block' }} />
               {cartCount > 0 && <span className={styles.cartBadge}>{cartCount}</span>}
             </button>
 
             {status === 'authenticated' ? (
-              <div className={styles.profileGroup}>
+              <div className={styles.profileGroup} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                 <button 
                   className={styles.profileBtn}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                   onClick={() => router.push(getDashboardLink())}
                 >
-                  <User size={20} />
+                  <User size={20} style={{ display: 'inline-block', flexShrink: 0 }} />
                   <span className={styles.userName}>{session.user?.name || 'User'}</span>
                 </button>
-                <button className={styles.logoutBtn} onClick={handleLogout}>
-                  <LogOut size={18} />
+                <button className={styles.logoutBtn} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} onClick={handleLogout}>
+                  <LogOut size={18} style={{ display: 'inline-block' }} />
                 </button>
               </div>
             ) : (
-              <button className="button-premium" onClick={() => router.push('/login')}>
+              <button className="button-premium" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => router.push('/login')}>
                 Sign In
               </button>
             )}

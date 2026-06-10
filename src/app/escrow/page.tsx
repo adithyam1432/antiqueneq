@@ -17,7 +17,7 @@ export default function EscrowPage() {
           1. The Dual-Layered Escrow Flow
         </h2>
         <p style={{ lineHeight: '1.7', color: 'var(--foreground)', opacity: 0.9, marginBottom: '20px' }}>
-          Because antiquities represent substantial financial investments, we do not support direct seller or instant release payments. All funds are deposited into a secure, audited Escrow vault managed by Anique.
+          Because antiquities represent substantial financial investments, we do not support direct seller or instant release payments. All funds are deposited into a secure, audited Escrow vault managed by AntiQues.
         </p>
         <div style={{ lineHeight: '1.7', color: 'var(--foreground)', opacity: 0.9 }}>
           Once the buyer initiates the purchase and uploads the transfer receipt:

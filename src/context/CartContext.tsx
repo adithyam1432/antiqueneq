@@ -43,8 +43,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setCart((prev) => {
       const existing = prev.find((item) => item.id === product.id)
       if (existing) {
+        const maxStock = product.stock || 1
+        const newQty = Math.min(existing.quantity + 1, maxStock)
         return prev.map((item) => 
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id ? { ...item, quantity: newQty } : item
         )
       }
       return [...prev, { ...product, quantity: 1 }]
@@ -58,7 +60,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const updateQuantity = (productId: string, quantity: number) => {
     if (quantity < 1) return
     setCart((prev) => 
-      prev.map((item) => item.id === productId ? { ...item, quantity } : item)
+      prev.map((item) => {
+        if (item.id === productId) {
+          const maxStock = item.stock || 1
+          const targetQty = Math.min(quantity, maxStock)
+          return { ...item, quantity: targetQty }
+        }
+        return item
+      })
     )
   }
 

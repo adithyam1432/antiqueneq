@@ -37,6 +37,8 @@ export async function GET() {
         description: 'A beautiful hand-painted ceramic vase with fine teal filigree patterns, dating back to the late 17th century.',
         price: 85000.00,
         category: 'Ceramics',
+        year_created: 'c. 1680',
+        stock: 1,
         status: 'APPROVED',
         image_url: '/vase_filigree.png',
         images: JSON.stringify(['/vase_filigree.png'])
@@ -48,6 +50,8 @@ export async function GET() {
         description: 'An elegant vintage clay vase with smooth terracotta finish and classical contours.',
         price: 12000.00,
         category: 'Ceramics',
+        year_created: 'Circa 1820',
+        stock: 1,
         status: 'APPROVED',
         image_url: '/vase.png',
         images: JSON.stringify(['/vase.png'])
@@ -59,6 +63,8 @@ export async function GET() {
         description: 'Exquisite 18K gold pocket watch with elaborate engravings and mechanical movements.',
         price: 45000.00,
         category: 'Horology',
+        year_created: 'c. 1895',
+        stock: 3,
         status: 'APPROVED',
         image_url: '/watch.png',
         images: JSON.stringify(['/watch.png'])
@@ -70,6 +76,8 @@ export async function GET() {
         description: 'Stunning 19th-century French gilt-bronze (ormolu) mantel clock featuring neoclassical figures.',
         price: 150000.00,
         category: 'Horology',
+        year_created: 'c. 1840',
+        stock: 1,
         status: 'APPROVED',
         image_url: '/clock_ormolu.png',
         images: JSON.stringify(['/clock_ormolu.png'])
@@ -81,6 +89,8 @@ export async function GET() {
         description: 'An authentic Kangra school miniature painting depicting a legendary scene with vibrant natural colors.',
         price: 95000.00,
         category: 'Paintings',
+        year_created: 'c. 1790',
+        stock: 1,
         status: 'APPROVED',
         image_url: '/painting_kangra.png',
         images: JSON.stringify(['/painting_kangra.png'])
@@ -92,6 +102,8 @@ export async function GET() {
         description: 'An authentic 18th-century Mughal steel shield featuring ornate gold damascening artwork.',
         price: 220000.00,
         category: 'Metalware',
+        year_created: 'c. 1750',
+        stock: 1,
         status: 'APPROVED',
         image_url: '/shield_mughal.png',
         images: JSON.stringify(['/shield_mughal.png'])
@@ -103,6 +115,8 @@ export async function GET() {
         description: 'A detailed Victorian-era leather-bound brass telescope used by maritime navigators.',
         price: 38000.00,
         category: 'Metalware',
+        year_created: 'c. 1870',
+        stock: 5,
         status: 'APPROVED',
         image_url: '/telescope_brass.png',
         images: JSON.stringify(['/telescope_brass.png'])
@@ -114,6 +128,8 @@ export async function GET() {
         description: 'Hand-carved solid rosewood cabinet with glass panels, perfect for showcasing rare antiquities.',
         price: 310000.00,
         category: 'Furniture',
+        year_created: 'c. 1910',
+        stock: 1,
         status: 'APPROVED',
         image_url: '/cabinet_rosewood.png',
         images: JSON.stringify(['/cabinet_rosewood.png'])
@@ -122,8 +138,8 @@ export async function GET() {
 
     for (const product of products) {
       await pool.query(`
-        INSERT INTO antiques (id, seller_id, title, description, price, category, status, image_url, images)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO antiques (id, seller_id, title, description, price, category, year_created, stock, status, image_url, images)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `, [
         product.id,
         product.seller_id,
@@ -131,6 +147,8 @@ export async function GET() {
         product.description,
         product.price,
         product.category,
+        product.year_created,
+        product.stock,
         product.status,
         product.image_url,
         product.images

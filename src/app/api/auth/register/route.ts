@@ -17,6 +17,24 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    // Validate Password Pattern: At least 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special character
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/
+    if (!passwordRegex.test(password)) {
+      return NextResponse.json(
+        { error: 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.' },
+        { status: 400 }
+      )
+    }
+
+    // Validate Contact Number Pattern: 10-digit mobile number, optionally prefixed with +91
+    const contactRegex = /^(\+91[\-\s]?)?[6-9]\d{9}$/
+    if (!contactRegex.test(contact_number)) {
+      return NextResponse.json(
+        { error: 'Please enter a valid 10-digit mobile number (e.g., 9876543210 or +919876543210).' },
+        { status: 400 }
+      )
+    }
+
     // Sanitize
     const sanitizedEmail = email.trim().toLowerCase()
     
