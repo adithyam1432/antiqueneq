@@ -66,6 +66,10 @@ async function run() {
     // Remove comments
     sql = sql.replace(/--.*$/gm, '');
 
+    // Remove CREATE DATABASE and USE statements to ensure tables are created in the correct active database (like defaultdb on Aiven)
+    sql = sql.replace(/CREATE DATABASE\s+IF\s+NOT\s+EXISTS\s+[\w`]+\s*;/gi, '');
+    sql = sql.replace(/USE\s+[\w`]+\s*;/gi, '');
+
     // Split statements by semicolon
     const statements = sql
       .split(';')
