@@ -47,9 +47,11 @@ Add the following key-value pairs under **Environment Variables**:
 | `NEXTAUTH_SECRET` | A secure, random 32+ character string (e.g. `your-super-secret-key-that-is-at-least-32-chars-long`) |
 | `NEXTAUTH_URL` | Your production Vercel deployment URL (e.g., `https://antiqueneq.vercel.app`) |
 | `MYSQL_HOST` | Host address of your cloud MySQL database |
+| `MYSQL_PORT` | Port of your cloud MySQL database (e.g., `23456` or `3306`) |
 | `MYSQL_USER` | Username for your cloud MySQL database |
 | `MYSQL_PASSWORD` | Password for your cloud MySQL database |
-| `MYSQL_DATABASE` | Database name (e.g., `antiques_db`) |
+| `MYSQL_DATABASE` | Database name (e.g., `defaultdb` or `antiques_db`) |
+| `MYSQL_SSL` | Set to `true` to enable secure SSL connections (required for Aiven) |
 | `SMTP_HOST` | SMTP server host (e.g., `smtp.gmail.com`) |
 | `SMTP_PORT` | SMTP port (e.g., `587`) |
 | `SMTP_USER` | SMTP email address (e.g., `aditya587644@gmail.com`) |
